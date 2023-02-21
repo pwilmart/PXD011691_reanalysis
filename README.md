@@ -8,9 +8,31 @@ The data is from [this paper](https://pubs.acs.org/doi/abs/10.1021/acs.jproteome
 
 The paper compares 10 single shot DIA runs to a 10-fraction TMT-labeling experiment using the same biological replicate samples of a mouse brain background. The samples were run in two labs using similar LC and mass spec systems. Note: [human UPS2](https://www.sigmaaldrich.com/US/en/technical-documents/technical-article/protein-biology/protein-mass-spectrometry/ups1-and-ups2-proteomic) proteins were spiked-in to the mouse background (more on this below).
 
-## Disclaimers 
+I would like to thank Michael Steidel for recently reminding me of this paper as a rather fair comparison of DIA and TMT quantitative methods. I had grabbed the TMT RAW files back in October 2019 and processed the data. I am guessing that I lost interest in the reanalysis because of the UPS2 proteins (more on that below). A recent [blog-like post](https://github.com/pwilmart/Human-plasma_DIA-vs-TMT) comparing DIA and TMT sparked interest in a data revisit.
 
 ---
+
+## Contents:
+- Disclaimers
+- TMT Data
+  - Proteome depths
+  - Missing data
+  - Comparison between sites
+- DIA Data
+  - Same metrics as TMT
+- Compare DIA to TMT
+  - Still thinking about this
+- Conclusions
+
+## Disclaimers
+
+No paper is ever 100% right or 100% wrong. I liked many things about the data from this paper. Ten biological replicates of a mouse brain (cerebellum) background was great. I think the most can be learned from the unchanging background proteins when evaluating data processing and normalizations. Comparing single-shot DIA to a fractionated TMT experiment is a fair way to compare because they use the same total amount of instrument time. These are also the typical use cases for both quant methods. Another interesting aspect was to run the same sample preparations at two lab sites using very similar instruments and instrument methods.
+
+It takes me many days (really) of effort to perform these reanalyses of published data. Being publicly critical of published work without doing a ton of careful work yourself is lazy and petty. The only fair thing is to pour over every detail in the paper and, if there is anything that could have been done better, to demonstrate that better results would have been obtained with the proposed changes. This can seem like a real "Reviewer 2" exercise, but it is not intended to be. The goal is not to single out the paper or its authors in a bad way. The goal is to show (hopefully) better data analysis methods so that the proteomics community can do even better work in the future. This is a tricky thread the needle situation and I apologize in advance if any feelings are hurt.     
+
+---
+
+
 
 ## Map to files in the repository
 
@@ -49,3 +71,6 @@ peptide_summary_9.txt|Peptide summary after basic protein grouping
 protein_summary_9.txt|Peptide summary after basic protein grouping
 sqt_conversion_log.txt|Top hit summarization log file
 
+---
+
+Thank you for reading. <br> Phil Wilmarth <br> February 21, 2023
