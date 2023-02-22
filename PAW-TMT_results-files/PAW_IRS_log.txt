@@ -1,0 +1,80 @@
+
+=================================================================
+ pandas_TMT_IRS_norm.py, v1.0.1, written by Phil Wilmarth 2017-8 
+=================================================================
+select a protein results file with TMT intensities and sample key:
+processing: labeled_grouped_protein_summary_TMT_9.txt
+proteins in results file: 7017
+total number of non-contaminant proteins: 6796
+contamaminant and decoy count: 221
+..353 proteins were not quantifiable in BGS
+..366 proteins were not quantifiable in FLI
+..proteins with no intensities experiment-wide: 46
+
+BGS SL Norm Factors:
+  TotInt_126C_BGS: 1.699911
+  TotInt_127N_BGS: 1.844715
+  TotInt_127C_BGS: 1.571324
+  TotInt_128N_BGS: 1.471266
+  TotInt_128C_BGS: 1.567188
+  TotInt_129N_BGS: 1.640908
+  TotInt_129C_BGS: 1.530616
+  TotInt_130N_BGS: 1.554447
+  TotInt_130C_BGS: 1.571550
+  TotInt_131N_BGS: 1.643198
+  TotInt_131C_BGS: 49.417822
+FLI SL Norm Factors:
+  TotInt_126C_FLI: 0.769369
+  TotInt_127N_FLI: 0.834859
+  TotInt_127C_FLI: 0.703469
+  TotInt_128N_FLI: 0.672383
+  TotInt_128C_FLI: 0.704958
+  TotInt_129N_FLI: 0.748628
+  TotInt_129C_FLI: 0.691038
+  TotInt_130N_FLI: 0.711326
+  TotInt_130C_FLI: 0.709598
+  TotInt_131N_FLI: 0.745327
+  TotInt_131C_FLI: 33.351042
+
+number of non-contaminant/decoy proteins: 6796
+number of proteins with full intensity sets: 6270
+
+=================================================================
+ pandas_TMT_IRS_norm.py, v1.0.1, written by Phil Wilmarth 2017-8 
+=================================================================
+select a protein results file with TMT intensities and sample key:
+processing: labeled_grouped_protein_summary_TMT_9.txt
+proteins in results file: 7017
+total number of non-contaminant proteins: 6784
+contamaminant and decoy count: 233
+..353 proteins were not quantifiable in BGS
+..366 proteins were not quantifiable in FLI
+..proteins with no intensities experiment-wide: 46
+
+BGS SL Norm Factors:
+  TotInt_126C_BGS: 1.699882
+  TotInt_127N_BGS: 1.844684
+  TotInt_127C_BGS: 1.571297
+  TotInt_128N_BGS: 1.471241
+  TotInt_128C_BGS: 1.567162
+  TotInt_129N_BGS: 1.640880
+  TotInt_129C_BGS: 1.530591
+  TotInt_130N_BGS: 1.554420
+  TotInt_130C_BGS: 1.571522
+  TotInt_131N_BGS: 1.643170
+  TotInt_131C_BGS: 49.417081
+FLI SL Norm Factors:
+  TotInt_126C_FLI: 0.769374
+  TotInt_127N_FLI: 0.834864
+  TotInt_127C_FLI: 0.703474
+  TotInt_128N_FLI: 0.672388
+  TotInt_128C_FLI: 0.704964
+  TotInt_129N_FLI: 0.748634
+  TotInt_129C_FLI: 0.691043
+  TotInt_130N_FLI: 0.711332
+  TotInt_130C_FLI: 0.709602
+  TotInt_131N_FLI: 0.745334
+  TotInt_131C_FLI: 33.351003
+
+number of non-contaminant/decoy proteins: 6784
+number of proteins with full intensity sets: 6260

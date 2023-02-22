@@ -1,0 +1,105 @@
+
+===============================================================
+ add_TMT_intensities.py, v1.0.1, written by Phil Wilmarth, OHSU
+===============================================================
+results file: grouped_protein_summary_9.txt
+trimmed average intensity must exceed: 500.0
+final zero values replaced with: 150.0
+getting intensities from SQT/TXT files
+
+LC run: BGS_D_D180413_S416-newPrep-TMT-10plex-SPS-Fr01of10_MSG_R01_T0_filtered.txt
+Total: 14939, reject: 180, net: 14759, reject rate: 1.20%
+  Reject breakdown: empty: 66, weak: 114
+
+LC run: BGS_D_D180413_S416-newPrep-TMT-10plex-SPS-Fr02of10_MSG_R01_T0_filtered.txt
+Total: 13933, reject: 217, net: 13716, reject rate: 1.56%
+  Reject breakdown: empty: 63, weak: 154
+
+LC run: BGS_D_D180413_S416-newPrep-TMT-10plex-SPS-Fr03of10_MSG_R01_T0_filtered.txt
+Total: 13255, reject: 123, net: 13132, reject rate: 0.93%
+  Reject breakdown: empty: 35, weak: 88
+
+LC run: BGS_D_D180413_S416-newPrep-TMT-10plex-SPS-Fr04of10_MSG_R01_T0_filtered.txt
+Total: 13042, reject: 164, net: 12878, reject rate: 1.26%
+  Reject breakdown: empty: 58, weak: 106
+
+LC run: BGS_D_D180413_S416-newPrep-TMT-10plex-SPS-Fr05of10_MSG_R01_T0_filtered.txt
+Total: 14083, reject: 216, net: 13867, reject rate: 1.53%
+  Reject breakdown: empty: 65, weak: 151
+
+LC run: BGS_D_D180413_S416-newPrep-TMT-10plex-SPS-Fr06of10_MSG_R01_T0_filtered.txt
+Total: 14019, reject: 336, net: 13683, reject rate: 2.40%
+  Reject breakdown: empty: 115, weak: 221
+
+LC run: BGS_D_D180413_S416-newPrep-TMT-10plex-SPS-Fr07of10_MSG_R01_T0_filtered.txt
+Total: 14988, reject: 306, net: 14682, reject rate: 2.04%
+  Reject breakdown: empty: 90, weak: 216
+
+LC run: BGS_D_D180413_S416-newPrep-TMT-10plex-SPS-Fr08of10_MSG_R01_T0_filtered.txt
+Total: 16313, reject: 230, net: 16083, reject rate: 1.41%
+  Reject breakdown: empty: 76, weak: 154
+
+LC run: BGS_D_D180413_S416-newPrep-TMT-10plex-SPS-Fr09of10_MSG_R01_T0_filtered.txt
+Total: 16874, reject: 253, net: 16621, reject rate: 1.50%
+  Reject breakdown: empty: 68, weak: 185
+
+LC run: BGS_D_D180413_S416-newPrep-TMT-10plex-SPS-Fr10of10_MSG_R01_T0_filtered.txt
+Total: 14741, reject: 257, net: 14484, reject rate: 1.74%
+  Reject breakdown: empty: 70, weak: 187
+
+LC run: FLI_180508_JMK_Biognosys_new_prep_Brain_TMT10_10fr_HpH_fr10_filtered.txt
+Total: 15520, reject: 349, net: 15171, reject rate: 2.25%
+  Reject breakdown: empty: 179, weak: 170
+
+LC run: FLI_180508_JMK_Biognosys_new_prep_Brain_TMT10_10fr_HpH_fr1_filtered.txt
+Total: 15668, reject: 310, net: 15358, reject rate: 1.98%
+  Reject breakdown: empty: 170, weak: 140
+
+LC run: FLI_180508_JMK_Biognosys_new_prep_Brain_TMT10_10fr_HpH_fr2_filtered.txt
+Total: 16137, reject: 310, net: 15827, reject rate: 1.92%
+  Reject breakdown: empty: 173, weak: 137
+
+LC run: FLI_180508_JMK_Biognosys_new_prep_Brain_TMT10_10fr_HpH_fr3_filtered.txt
+Total: 14679, reject: 381, net: 14298, reject rate: 2.60%
+  Reject breakdown: empty: 160, weak: 221
+
+LC run: FLI_180508_JMK_Biognosys_new_prep_Brain_TMT10_10fr_HpH_fr4_filtered.txt
+Total: 14078, reject: 299, net: 13779, reject rate: 2.12%
+  Reject breakdown: empty: 159, weak: 140
+
+LC run: FLI_180508_JMK_Biognosys_new_prep_Brain_TMT10_10fr_HpH_fr5_filtered.txt
+Total: 14747, reject: 334, net: 14413, reject rate: 2.26%
+  Reject breakdown: empty: 196, weak: 138
+
+LC run: FLI_180508_JMK_Biognosys_new_prep_Brain_TMT10_10fr_HpH_fr6_filtered.txt
+Total: 14987, reject: 335, net: 14652, reject rate: 2.24%
+  Reject breakdown: empty: 174, weak: 161
+
+LC run: FLI_180508_JMK_Biognosys_new_prep_Brain_TMT10_10fr_HpH_fr7_filtered.txt
+Total: 15367, reject: 305, net: 15062, reject rate: 1.98%
+  Reject breakdown: empty: 142, weak: 163
+
+LC run: FLI_180508_JMK_Biognosys_new_prep_Brain_TMT10_10fr_HpH_fr8_filtered.txt
+Total: 16136, reject: 293, net: 15843, reject rate: 1.82%
+  Reject breakdown: empty: 164, weak: 129
+
+LC run: FLI_180508_JMK_Biognosys_new_prep_Brain_TMT10_10fr_HpH_fr9_filtered.txt
+Total: 17560, reject: 340, net: 17220, reject rate: 1.94%
+  Reject breakdown: empty: 198, weak: 142
+
+total PSMs with added reporter ions: 301066
+total PSMs with empty reporter ions: 2421
+total PSMs with intensities below cutoff: 3117
+total PSMs with zeroed reporter ions: 5538
+overall reject rate: 1.84%
+length of tmt_intensity_dict: 301066
+length of peptide_dict: 117804
+length of unique_peptide_dict: 112756
+non-redundant peptide sequence count: 87682
+BGS_peptide_results_9.txt
+..number of distinct psms: 144382
+..number of MS2 scans: 143693
+FLI_peptide_results_9.txt
+..number of distinct psms: 152741
+..number of MS2 scans: 152027
+length peptide_sets_dict is: 7017

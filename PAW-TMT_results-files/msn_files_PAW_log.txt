@@ -1,0 +1,391 @@
+
+Compiling pre-filter stats Mon Feb 13 17:48:08 2023
+...short peptide top hits: 43665 (19470)
+...short peptide scans: 31635 (15245)
+
+...FLI_180508_JMK_Biognosys_new_prep_Brain_TMT10_10fr_HpH_fr9: all top hits 36000 (12370), all scans 30819 (11639), fdr 37.77
+...FLI_180508_JMK_Biognosys_new_prep_Brain_TMT10_10fr_HpH_fr8: all top hits 33999 (12699), all scans 29763 (12082), fdr 40.59
+...FLI_180508_JMK_Biognosys_new_prep_Brain_TMT10_10fr_HpH_fr7: all top hits 33226 (13131), all scans 29417 (12444), fdr 42.30
+...FLI_180508_JMK_Biognosys_new_prep_Brain_TMT10_10fr_HpH_fr6: all top hits 32483 (12812), all scans 28539 (12101), fdr 42.40
+...FLI_180508_JMK_Biognosys_new_prep_Brain_TMT10_10fr_HpH_fr5: all top hits 32905 (13294), all scans 28797 (12557), fdr 43.61
+...FLI_180508_JMK_Biognosys_new_prep_Brain_TMT10_10fr_HpH_fr4: all top hits 32664 (13400), all scans 28308 (12723), fdr 44.94
+...FLI_180508_JMK_Biognosys_new_prep_Brain_TMT10_10fr_HpH_fr3: all top hits 34992 (14573), all scans 29320 (13735), fdr 46.85
+...FLI_180508_JMK_Biognosys_new_prep_Brain_TMT10_10fr_HpH_fr2: all top hits 36047 (13298), all scans 29997 (12544), fdr 41.82
+...FLI_180508_JMK_Biognosys_new_prep_Brain_TMT10_10fr_HpH_fr10: all top hits 34181 (12809), all scans 29199 (12181), fdr 41.72
+...FLI_180508_JMK_Biognosys_new_prep_Brain_TMT10_10fr_HpH_fr1: all top hits 35261 (12870), all scans 29603 (12232), fdr 41.32
+...BGS_D_D180413_S416-newPrep-TMT-10plex-SPS-Fr10of10_MSG_R01_T0: all top hits 29160 (9262), all scans 24543 (8741), fdr 35.62
+...BGS_D_D180413_S416-newPrep-TMT-10plex-SPS-Fr09of10_MSG_R01_T0: all top hits 30855 (8638), all scans 26099 (8153), fdr 31.24
+...BGS_D_D180413_S416-newPrep-TMT-10plex-SPS-Fr08of10_MSG_R01_T0: all top hits 29638 (8940), all scans 25826 (8408), fdr 32.56
+...BGS_D_D180413_S416-newPrep-TMT-10plex-SPS-Fr07of10_MSG_R01_T0: all top hits 27563 (8997), all scans 24344 (8476), fdr 34.82
+...BGS_D_D180413_S416-newPrep-TMT-10plex-SPS-Fr06of10_MSG_R01_T0: all top hits 25584 (7787), all scans 22340 (7400), fdr 33.12
+...BGS_D_D180413_S416-newPrep-TMT-10plex-SPS-Fr05of10_MSG_R01_T0: all top hits 27298 (9886), all scans 24407 (9364), fdr 38.37
+...BGS_D_D180413_S416-newPrep-TMT-10plex-SPS-Fr04of10_MSG_R01_T0: all top hits 26228 (9660), all scans 23066 (9159), fdr 39.71
+...BGS_D_D180413_S416-newPrep-TMT-10plex-SPS-Fr03of10_MSG_R01_T0: all top hits 28333 (10127), all scans 23794 (9584), fdr 40.28
+...BGS_D_D180413_S416-newPrep-TMT-10plex-SPS-Fr02of10_MSG_R01_T0: all top hits 27917 (8894), all scans 23044 (8345), fdr 36.21
+...BGS_D_D180413_S416-newPrep-TMT-10plex-SPS-Fr01of10_MSG_R01_T0: all top hits 30363 (9438), all scans 24881 (8875), fdr 35.67
+
+...Aggregate top hits: 624697 (222885) 35.68
+...Aggregate scans: 536106 (210743) 39.31
+
+All target subclass matches (all top hits):
+array([[[[     0,      0],
+         [231339,  55858]],
+
+        [[     0,      0],
+         [203271,  68470]],
+
+        [[     0,      0],
+         [ 46380,  19379]]]])
+All decoy subclass matches (all top hits):
+array([[[[    0,     0],
+         [79339, 15827]],
+
+        [[    0,     0],
+         [70021, 23203]],
+
+        [[    0,     0],
+         [23734, 10761]]]])
+All net subclass matches (all top hits):
+array([[[[     0,      0],
+         [152000,  40031]],
+
+        [[     0,      0],
+         [133250,  45267]],
+
+        [[     0,      0],
+         [ 22646,   8618]]]])
+All target subclass matches (scans):
+array([[[[     0,      0],
+         [198802,  44131]],
+
+        [[     0,      0],
+         [179375,  54166]],
+
+        [[     0,      0],
+         [ 43008,  16744]]]])
+All decoy subclass matches (scans):
+array([[[[    0,     0],
+         [74135, 14835]],
+
+        [[    0,     0],
+         [66826, 22141]],
+
+        [[    0,     0],
+         [22522, 10312]]]])
+All net subclass matches (scans):
+array([[[[     0,      0],
+         [124667,  29296]],
+
+        [[     0,      0],
+         [112549,  32025]],
+
+        [[     0,      0],
+         [ 20486,   6432]]]])
+
+Filtering data and compiling stats Mon Feb 13 17:49:00 2023
+...Minimum peptide length: 7
+...Maximum number of mods per peptide: 5
+...DeltaMass list: ['0 Da', '1 Da', 'out']
+...Charge state list: [2, 3, 4]
+...NTT list: [1, 2]
+...Modifications list: [' ', '*']
+...Delta mass windows:
+......Z = 2
+.........DeltaMass 0 Da: -0.0150 to 0.0165
+.........DeltaMass 1 Da: 0.9700 to 1.0180
+......Z = 3
+.........DeltaMass 0 Da: -0.0225 to 0.0250
+.........DeltaMass 1 Da: 0.9670 to 1.0295
+......Z = 4
+.........DeltaMass 0 Da: -0.0215 to 0.0210
+.........DeltaMass 1 Da: 0.9678 to 1.0240
+...Conditional score thresholds:
+array([[[[100.        , 100.        ],
+         [  1.93333333,   1.33333333]],
+
+        [[100.        , 100.        ],
+         [  1.2       ,   1.13333333]],
+
+        [[100.        , 100.        ],
+         [  1.66666667,   2.        ]]],
+
+
+       [[[100.        , 100.        ],
+         [  1.46666667,   1.4       ]],
+
+        [[100.        , 100.        ],
+         [  1.53333333,   1.53333333]],
+
+        [[100.        , 100.        ],
+         [  1.86666667,   2.13333333]]],
+
+
+       [[[100.        , 100.        ],
+         [  4.4       ,   4.53333333]],
+
+        [[100.        , 100.        ],
+         [  3.93333333,   3.66666667]],
+
+        [[100.        , 100.        ],
+         [  3.86666667,   4.33333333]]]])
+
+...FLI_180508_JMK_Biognosys_new_prep_Brain_TMT10_10fr_HpH_fr9: filtered top hits 21231 (171), filtered scans 17419 (158), fdr 0.91
+......filtered TXT file written
+......filtered SQT file written
+......filtered MS2 file written
+...FLI_180508_JMK_Biognosys_new_prep_Brain_TMT10_10fr_HpH_fr8: filtered top hits 18973 (154), filtered scans 16004 (150), fdr 0.94
+......filtered TXT file written
+......filtered SQT file written
+......filtered MS2 file written
+...FLI_180508_JMK_Biognosys_new_prep_Brain_TMT10_10fr_HpH_fr7: filtered top hits 17921 (172), filtered scans 15219 (163), fdr 1.07
+......filtered TXT file written
+......filtered SQT file written
+......filtered MS2 file written
+...FLI_180508_JMK_Biognosys_new_prep_Brain_TMT10_10fr_HpH_fr6: filtered top hits 17533 (156), filtered scans 14858 (141), fdr 0.95
+......filtered TXT file written
+......filtered SQT file written
+......filtered MS2 file written
+...FLI_180508_JMK_Biognosys_new_prep_Brain_TMT10_10fr_HpH_fr5: filtered top hits 17606 (190), filtered scans 14591 (174), fdr 1.19
+......filtered TXT file written
+......filtered SQT file written
+......filtered MS2 file written
+...FLI_180508_JMK_Biognosys_new_prep_Brain_TMT10_10fr_HpH_fr4: filtered top hits 16858 (167), filtered scans 13921 (162), fdr 1.16
+......filtered TXT file written
+......filtered SQT file written
+......filtered MS2 file written
+...FLI_180508_JMK_Biognosys_new_prep_Brain_TMT10_10fr_HpH_fr3: filtered top hits 18819 (215), filtered scans 14491 (211), fdr 1.46
+......filtered TXT file written
+......filtered SQT file written
+......filtered MS2 file written
+...FLI_180508_JMK_Biognosys_new_prep_Brain_TMT10_10fr_HpH_fr2: filtered top hits 20680 (201), filtered scans 15971 (178), fdr 1.11
+......filtered TXT file written
+......filtered SQT file written
+......filtered MS2 file written
+...FLI_180508_JMK_Biognosys_new_prep_Brain_TMT10_10fr_HpH_fr10: filtered top hits 19093 (176), filtered scans 15377 (167), fdr 1.09
+......filtered TXT file written
+......filtered SQT file written
+......filtered MS2 file written
+...FLI_180508_JMK_Biognosys_new_prep_Brain_TMT10_10fr_HpH_fr1: filtered top hits 19669 (205), filtered scans 15517 (171), fdr 1.10
+......filtered TXT file written
+......filtered SQT file written
+......filtered MS2 file written
+...BGS_D_D180413_S416-newPrep-TMT-10plex-SPS-Fr10of10_MSG_R01_T0: filtered top hits 18401 (169), filtered scans 14609 (160), fdr 1.10
+......filtered TXT file written
+......filtered SQT file written
+......filtered MS2 file written
+...BGS_D_D180413_S416-newPrep-TMT-10plex-SPS-Fr09of10_MSG_R01_T0: filtered top hits 20706 (123), filtered scans 16771 (122), fdr 0.73
+......filtered TXT file written
+......filtered SQT file written
+......filtered MS2 file written
+...BGS_D_D180413_S416-newPrep-TMT-10plex-SPS-Fr08of10_MSG_R01_T0: filtered top hits 19256 (152), filtered scans 16189 (146), fdr 0.90
+......filtered TXT file written
+......filtered SQT file written
+......filtered MS2 file written
+...BGS_D_D180413_S416-newPrep-TMT-10plex-SPS-Fr07of10_MSG_R01_T0: filtered top hits 17378 (136), filtered scans 14882 (123), fdr 0.83
+......filtered TXT file written
+......filtered SQT file written
+......filtered MS2 file written
+...BGS_D_D180413_S416-newPrep-TMT-10plex-SPS-Fr06of10_MSG_R01_T0: filtered top hits 16373 (127), filtered scans 13918 (116), fdr 0.83
+......filtered TXT file written
+......filtered SQT file written
+......filtered MS2 file written
+...BGS_D_D180413_S416-newPrep-TMT-10plex-SPS-Fr05of10_MSG_R01_T0: filtered top hits 16047 (158), filtered scans 13951 (148), fdr 1.06
+......filtered TXT file written
+......filtered SQT file written
+......filtered MS2 file written
+...BGS_D_D180413_S416-newPrep-TMT-10plex-SPS-Fr04of10_MSG_R01_T0: filtered top hits 15231 (158), filtered scans 12908 (146), fdr 1.13
+......filtered TXT file written
+......filtered SQT file written
+......filtered MS2 file written
+...BGS_D_D180413_S416-newPrep-TMT-10plex-SPS-Fr03of10_MSG_R01_T0: filtered top hits 16638 (178), filtered scans 13107 (170), fdr 1.30
+......filtered TXT file written
+......filtered SQT file written
+......filtered MS2 file written
+...BGS_D_D180413_S416-newPrep-TMT-10plex-SPS-Fr02of10_MSG_R01_T0: filtered top hits 17760 (172), filtered scans 13791 (161), fdr 1.17
+......filtered TXT file written
+......filtered SQT file written
+......filtered MS2 file written
+...BGS_D_D180413_S416-newPrep-TMT-10plex-SPS-Fr01of10_MSG_R01_T0: filtered top hits 19328 (171), filtered scans 14815 (152), fdr 1.03
+......filtered TXT file written
+......filtered SQT file written
+......filtered MS2 file written
+
+...Aggregate filtered top hits: 365501 (3351) 0.92
+...Aggregate filtered scans: 298309 (3119) 1.05
+
+Filtered target subclass matches (all top hits):
+array([[[[     0,      0],
+         [127009,  30793]],
+
+        [[     0,      0],
+         [106131,  32534]],
+
+        [[     0,      0],
+         [ 17274,   5951]]],
+
+
+       [[[     0,      0],
+         [  7887,   3091]],
+
+        [[     0,      0],
+         [ 14735,   6753]],
+
+        [[     0,      0],
+         [  3120,   1365]]],
+
+
+       [[[     0,      0],
+         [  2978,    575]],
+
+        [[     0,      0],
+         [  3176,   1358]],
+
+        [[     0,      0],
+         [   602,    169]]]])
+Filtered decoy subclass matches (all top hits):
+array([[[[   0,    0],
+         [1183,  250]],
+
+        [[   0,    0],
+         [1029,  256]],
+
+        [[   0,    0],
+         [ 174,   48]]],
+
+
+       [[[   0,    0],
+         [  71,   20]],
+
+        [[   0,    0],
+         [ 139,   49]],
+
+        [[   0,    0],
+         [  37,   11]]],
+
+
+       [[[   0,    0],
+         [  26,    5]],
+
+        [[   0,    0],
+         [  33,   12]],
+
+        [[   0,    0],
+         [   6,    2]]]])
+Filtered net subclass matches (all top hits):
+array([[[[     0,      0],
+         [125826,  30543]],
+
+        [[     0,      0],
+         [105102,  32278]],
+
+        [[     0,      0],
+         [ 17100,   5903]]],
+
+
+       [[[     0,      0],
+         [  7816,   3071]],
+
+        [[     0,      0],
+         [ 14596,   6704]],
+
+        [[     0,      0],
+         [  3083,   1354]]],
+
+
+       [[[     0,      0],
+         [  2952,    570]],
+
+        [[     0,      0],
+         [  3143,   1346]],
+
+        [[     0,      0],
+         [   596,    167]]]])
+Filtered target subclass matches (scans):
+array([[[[     0,      0],
+         [105185,  23129]],
+
+        [[     0,      0],
+         [ 90421,  23610]],
+
+        [[     0,      0],
+         [ 15571,   4567]]],
+
+
+       [[[     0,      0],
+         [  6055,   1860]],
+
+        [[     0,      0],
+         [ 12433,   4367]],
+
+        [[     0,      0],
+         [  2839,   1034]]],
+
+
+       [[[     0,      0],
+         [  2448,    428]],
+
+        [[     0,      0],
+         [  2694,    990]],
+
+        [[     0,      0],
+         [   548,    130]]]])
+Filtered decoy subclass matches (scans):
+array([[[[   0,    0],
+         [1072,  233]],
+
+        [[   0,    0],
+         [ 972,  242]],
+
+        [[   0,    0],
+         [ 162,   46]]],
+
+
+       [[[   0,    0],
+         [  65,   19]],
+
+        [[   0,    0],
+         [ 138,   46]],
+
+        [[   0,    0],
+         [  30,   11]]],
+
+
+       [[[   0,    0],
+         [  25,    5]],
+
+        [[   0,    0],
+         [  33,   12]],
+
+        [[   0,    0],
+         [   6,    2]]]])
+Filtered net subclass matches (scans):
+array([[[[     0,      0],
+         [104113,  22896]],
+
+        [[     0,      0],
+         [ 89449,  23368]],
+
+        [[     0,      0],
+         [ 15409,   4521]]],
+
+
+       [[[     0,      0],
+         [  5990,   1841]],
+
+        [[     0,      0],
+         [ 12295,   4321]],
+
+        [[     0,      0],
+         [  2809,   1023]]],
+
+
+       [[[     0,      0],
+         [  2423,    423]],
+
+        [[     0,      0],
+         [  2661,    978]],
+
+        [[     0,      0],
+         [   542,    128]]]])
+
+...finished. Mon Feb 13 18:04:32 2023

@@ -22,7 +22,9 @@ I would like to thank Michael Steidel for recently reminding me of this paper as
   - Data quality
   - Comparison between sites
 - DIA Data
-  - Same metrics as TMT
+  - Try to use similar protein summarization as TMT
+  - Use newer DIA Software
+  - Similar QC metrics as TMT
 - Compare DIA to TMT
   - Still thinking about this
 - Conclusions

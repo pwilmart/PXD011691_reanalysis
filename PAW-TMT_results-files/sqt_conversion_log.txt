@@ -1,0 +1,170 @@
+==========================================================
+ sqt_converter.py, v2.0.3, written by Phil Wilmarth, 2019  
+==========================================================
+processing: E:/PXD011691_Vitek/Canonical_2023/msn_files: Mon Feb 13 13:34:33 2023
+...UPS_2022.10_Mus-musculus_UP000000589_10090_both.fasta had 44386 proteins
+...peptide digest has 7791674 peptides
+...start: Mon Feb 13 13:34:35 2023, end: Mon Feb 13 13:35:37 2023
+
+...done reading: BGS_D_D180413_S416-newPrep-TMT-10plex-SPS-Fr01of10_MSG_R01_T0.sqt (39306 scans)
+...starting lookups for 39306 results at Mon Feb 13 13:35:42 2023
+...match counts agreed: 29913, disagreed: 0
+...starting TXT file creation at: Mon Feb 13 13:36:23 2023
+...found: E:/PXD011691_Vitek/Canonical_2023\msn_files\BGS_D_D180413_S416-newPrep-TMT-10plex-SPS-Fr01of10_MSG_R01_T0.PAW_tmt.txt
+...getting tmt data from: BGS_D_D180413_S416-newPrep-TMT-10plex-SPS-Fr01of10_MSG_R01_T0.PAW_tmt.txt
+...there were 2956 short peptides
+
+...done reading: BGS_D_D180413_S416-newPrep-TMT-10plex-SPS-Fr02of10_MSG_R01_T0.sqt (37187 scans)
+...starting lookups for 37187 results at Mon Feb 13 13:36:29 2023
+...match counts agreed: 26210, disagreed: 0
+...starting TXT file creation at: Mon Feb 13 13:37:02 2023
+...found: E:/PXD011691_Vitek/Canonical_2023\msn_files\BGS_D_D180413_S416-newPrep-TMT-10plex-SPS-Fr02of10_MSG_R01_T0.PAW_tmt.txt
+...getting tmt data from: BGS_D_D180413_S416-newPrep-TMT-10plex-SPS-Fr02of10_MSG_R01_T0.PAW_tmt.txt
+...there were 3202 short peptides
+
+...done reading: BGS_D_D180413_S416-newPrep-TMT-10plex-SPS-Fr03of10_MSG_R01_T0.sqt (39913 scans)
+...starting lookups for 39913 results at Mon Feb 13 13:37:10 2023
+...match counts agreed: 28186, disagreed: 0
+...starting TXT file creation at: Mon Feb 13 13:38:00 2023
+...found: E:/PXD011691_Vitek/Canonical_2023\msn_files\BGS_D_D180413_S416-newPrep-TMT-10plex-SPS-Fr03of10_MSG_R01_T0.PAW_tmt.txt
+...getting tmt data from: BGS_D_D180413_S416-newPrep-TMT-10plex-SPS-Fr03of10_MSG_R01_T0.PAW_tmt.txt
+...there were 4103 short peptides
+
+...done reading: BGS_D_D180413_S416-newPrep-TMT-10plex-SPS-Fr04of10_MSG_R01_T0.sqt (36465 scans)
+...starting lookups for 36465 results at Mon Feb 13 13:38:06 2023
+...match counts agreed: 24832, disagreed: 0
+...starting TXT file creation at: Mon Feb 13 13:38:46 2023
+...found: E:/PXD011691_Vitek/Canonical_2023\msn_files\BGS_D_D180413_S416-newPrep-TMT-10plex-SPS-Fr04of10_MSG_R01_T0.PAW_tmt.txt
+...getting tmt data from: BGS_D_D180413_S416-newPrep-TMT-10plex-SPS-Fr04of10_MSG_R01_T0.PAW_tmt.txt
+...there were 2367 short peptides
+
+...done reading: BGS_D_D180413_S416-newPrep-TMT-10plex-SPS-Fr05of10_MSG_R01_T0.sqt (38056 scans)
+...starting lookups for 38056 results at Mon Feb 13 13:38:53 2023
+...match counts agreed: 24635, disagreed: 0
+...starting TXT file creation at: Mon Feb 13 13:39:32 2023
+...found: E:/PXD011691_Vitek/Canonical_2023\msn_files\BGS_D_D180413_S416-newPrep-TMT-10plex-SPS-Fr05of10_MSG_R01_T0.PAW_tmt.txt
+...getting tmt data from: BGS_D_D180413_S416-newPrep-TMT-10plex-SPS-Fr05of10_MSG_R01_T0.PAW_tmt.txt
+...there were 2579 short peptides
+
+...done reading: BGS_D_D180413_S416-newPrep-TMT-10plex-SPS-Fr06of10_MSG_R01_T0.sqt (33694 scans)
+...starting lookups for 33694 results at Mon Feb 13 13:39:40 2023
+...match counts agreed: 20546, disagreed: 0
+...starting TXT file creation at: Mon Feb 13 13:40:06 2023
+...found: E:/PXD011691_Vitek/Canonical_2023\msn_files\BGS_D_D180413_S416-newPrep-TMT-10plex-SPS-Fr06of10_MSG_R01_T0.PAW_tmt.txt
+...getting tmt data from: BGS_D_D180413_S416-newPrep-TMT-10plex-SPS-Fr06of10_MSG_R01_T0.PAW_tmt.txt
+...there were 2295 short peptides
+
+...done reading: BGS_D_D180413_S416-newPrep-TMT-10plex-SPS-Fr07of10_MSG_R01_T0.sqt (37191 scans)
+...starting lookups for 37191 results at Mon Feb 13 13:40:11 2023
+...match counts agreed: 22874, disagreed: 0
+...starting TXT file creation at: Mon Feb 13 13:40:34 2023
+...found: E:/PXD011691_Vitek/Canonical_2023\msn_files\BGS_D_D180413_S416-newPrep-TMT-10plex-SPS-Fr07of10_MSG_R01_T0.PAW_tmt.txt
+...getting tmt data from: BGS_D_D180413_S416-newPrep-TMT-10plex-SPS-Fr07of10_MSG_R01_T0.PAW_tmt.txt
+...there were 2612 short peptides
+
+...done reading: BGS_D_D180413_S416-newPrep-TMT-10plex-SPS-Fr08of10_MSG_R01_T0.sqt (38622 scans)
+...starting lookups for 38622 results at Mon Feb 13 13:40:42 2023
+...match counts agreed: 23535, disagreed: 0
+...starting TXT file creation at: Mon Feb 13 13:41:18 2023
+...found: E:/PXD011691_Vitek/Canonical_2023\msn_files\BGS_D_D180413_S416-newPrep-TMT-10plex-SPS-Fr08of10_MSG_R01_T0.PAW_tmt.txt
+...getting tmt data from: BGS_D_D180413_S416-newPrep-TMT-10plex-SPS-Fr08of10_MSG_R01_T0.PAW_tmt.txt
+...there were 2638 short peptides
+
+...done reading: BGS_D_D180413_S416-newPrep-TMT-10plex-SPS-Fr09of10_MSG_R01_T0.sqt (39265 scans)
+...starting lookups for 39265 results at Mon Feb 13 13:41:24 2023
+...match counts agreed: 17228, disagreed: 0
+...starting TXT file creation at: Mon Feb 13 13:41:57 2023
+...found: E:/PXD011691_Vitek/Canonical_2023\msn_files\BGS_D_D180413_S416-newPrep-TMT-10plex-SPS-Fr09of10_MSG_R01_T0.PAW_tmt.txt
+...getting tmt data from: BGS_D_D180413_S416-newPrep-TMT-10plex-SPS-Fr09of10_MSG_R01_T0.PAW_tmt.txt
+...there were 2935 short peptides
+
+...done reading: BGS_D_D180413_S416-newPrep-TMT-10plex-SPS-Fr10of10_MSG_R01_T0.sqt (38392 scans)
+...starting lookups for 38392 results at Mon Feb 13 13:42:05 2023
+...match counts agreed: 21519, disagreed: 0
+...starting TXT file creation at: Mon Feb 13 13:42:38 2023
+...found: E:/PXD011691_Vitek/Canonical_2023\msn_files\BGS_D_D180413_S416-newPrep-TMT-10plex-SPS-Fr10of10_MSG_R01_T0.PAW_tmt.txt
+...getting tmt data from: BGS_D_D180413_S416-newPrep-TMT-10plex-SPS-Fr10of10_MSG_R01_T0.PAW_tmt.txt
+...there were 2850 short peptides
+
+...done reading: FLI_180508_JMK_Biognosys_new_prep_Brain_TMT10_10fr_HpH_fr1.sqt (46931 scans)
+...starting lookups for 46931 results at Mon Feb 13 13:42:47 2023
+...match counts agreed: 23996, disagreed: 0
+...starting TXT file creation at: Mon Feb 13 13:43:13 2023
+...found: E:/PXD011691_Vitek/Canonical_2023\msn_files\FLI_180508_JMK_Biognosys_new_prep_Brain_TMT10_10fr_HpH_fr1.PAW_tmt.txt
+...getting tmt data from: FLI_180508_JMK_Biognosys_new_prep_Brain_TMT10_10fr_HpH_fr1.PAW_tmt.txt
+...there were 2057 short peptides
+
+...done reading: FLI_180508_JMK_Biognosys_new_prep_Brain_TMT10_10fr_HpH_fr10.sqt (46082 scans)
+...starting lookups for 46082 results at Mon Feb 13 13:43:20 2023
+...match counts agreed: 22293, disagreed: 0
+...starting TXT file creation at: Mon Feb 13 13:44:00 2023
+...found: E:/PXD011691_Vitek/Canonical_2023\msn_files\FLI_180508_JMK_Biognosys_new_prep_Brain_TMT10_10fr_HpH_fr10.PAW_tmt.txt
+...getting tmt data from: FLI_180508_JMK_Biognosys_new_prep_Brain_TMT10_10fr_HpH_fr10.PAW_tmt.txt
+...there were 1919 short peptides
+
+...done reading: FLI_180508_JMK_Biognosys_new_prep_Brain_TMT10_10fr_HpH_fr2.sqt (47251 scans)
+...starting lookups for 47251 results at Mon Feb 13 13:44:09 2023
+...match counts agreed: 22755, disagreed: 0
+...starting TXT file creation at: Mon Feb 13 13:44:46 2023
+...found: E:/PXD011691_Vitek/Canonical_2023\msn_files\FLI_180508_JMK_Biognosys_new_prep_Brain_TMT10_10fr_HpH_fr2.PAW_tmt.txt
+...getting tmt data from: FLI_180508_JMK_Biognosys_new_prep_Brain_TMT10_10fr_HpH_fr2.PAW_tmt.txt
+...there were 2362 short peptides
+
+...done reading: FLI_180508_JMK_Biognosys_new_prep_Brain_TMT10_10fr_HpH_fr3.sqt (48886 scans)
+...starting lookups for 48886 results at Mon Feb 13 13:44:56 2023
+...match counts agreed: 25810, disagreed: 0
+...starting TXT file creation at: Mon Feb 13 13:45:22 2023
+...found: E:/PXD011691_Vitek/Canonical_2023\msn_files\FLI_180508_JMK_Biognosys_new_prep_Brain_TMT10_10fr_HpH_fr3.PAW_tmt.txt
+...getting tmt data from: FLI_180508_JMK_Biognosys_new_prep_Brain_TMT10_10fr_HpH_fr3.PAW_tmt.txt
+...there were 2427 short peptides
+
+...done reading: FLI_180508_JMK_Biognosys_new_prep_Brain_TMT10_10fr_HpH_fr4.sqt (45012 scans)
+...starting lookups for 45012 results at Mon Feb 13 13:45:31 2023
+...match counts agreed: 21396, disagreed: 0
+...starting TXT file creation at: Mon Feb 13 13:45:59 2023
+...found: E:/PXD011691_Vitek/Canonical_2023\msn_files\FLI_180508_JMK_Biognosys_new_prep_Brain_TMT10_10fr_HpH_fr4.PAW_tmt.txt
+...getting tmt data from: FLI_180508_JMK_Biognosys_new_prep_Brain_TMT10_10fr_HpH_fr4.PAW_tmt.txt
+...there were 1627 short peptides
+
+...done reading: FLI_180508_JMK_Biognosys_new_prep_Brain_TMT10_10fr_HpH_fr5.sqt (45301 scans)
+...starting lookups for 45301 results at Mon Feb 13 13:46:08 2023
+...match counts agreed: 20449, disagreed: 0
+...starting TXT file creation at: Mon Feb 13 13:46:44 2023
+...found: E:/PXD011691_Vitek/Canonical_2023\msn_files\FLI_180508_JMK_Biognosys_new_prep_Brain_TMT10_10fr_HpH_fr5.PAW_tmt.txt
+...getting tmt data from: FLI_180508_JMK_Biognosys_new_prep_Brain_TMT10_10fr_HpH_fr5.PAW_tmt.txt
+...there were 1739 short peptides
+
+...done reading: FLI_180508_JMK_Biognosys_new_prep_Brain_TMT10_10fr_HpH_fr6.sqt (44043 scans)
+...starting lookups for 44043 results at Mon Feb 13 13:46:53 2023
+...match counts agreed: 19233, disagreed: 0
+...starting TXT file creation at: Mon Feb 13 13:47:18 2023
+...found: E:/PXD011691_Vitek/Canonical_2023\msn_files\FLI_180508_JMK_Biognosys_new_prep_Brain_TMT10_10fr_HpH_fr6.PAW_tmt.txt
+...getting tmt data from: FLI_180508_JMK_Biognosys_new_prep_Brain_TMT10_10fr_HpH_fr6.PAW_tmt.txt
+...there were 1783 short peptides
+
+...done reading: FLI_180508_JMK_Biognosys_new_prep_Brain_TMT10_10fr_HpH_fr7.sqt (45978 scans)
+...starting lookups for 45978 results at Mon Feb 13 13:47:24 2023
+...match counts agreed: 20208, disagreed: 0
+...starting TXT file creation at: Mon Feb 13 13:47:53 2023
+...found: E:/PXD011691_Vitek/Canonical_2023\msn_files\FLI_180508_JMK_Biognosys_new_prep_Brain_TMT10_10fr_HpH_fr7.PAW_tmt.txt
+...getting tmt data from: FLI_180508_JMK_Biognosys_new_prep_Brain_TMT10_10fr_HpH_fr7.PAW_tmt.txt
+...there were 1880 short peptides
+
+...done reading: FLI_180508_JMK_Biognosys_new_prep_Brain_TMT10_10fr_HpH_fr8.sqt (45905 scans)
+...starting lookups for 45905 results at Mon Feb 13 13:48:02 2023
+...match counts agreed: 19033, disagreed: 0
+...starting TXT file creation at: Mon Feb 13 13:48:32 2023
+...found: E:/PXD011691_Vitek/Canonical_2023\msn_files\FLI_180508_JMK_Biognosys_new_prep_Brain_TMT10_10fr_HpH_fr8.PAW_tmt.txt
+...getting tmt data from: FLI_180508_JMK_Biognosys_new_prep_Brain_TMT10_10fr_HpH_fr8.PAW_tmt.txt
+...there were 1802 short peptides
+
+...done reading: FLI_180508_JMK_Biognosys_new_prep_Brain_TMT10_10fr_HpH_fr9.sqt (46801 scans)
+...starting lookups for 46801 results at Mon Feb 13 13:48:42 2023
+...match counts agreed: 17275, disagreed: 0
+...starting TXT file creation at: Mon Feb 13 13:48:59 2023
+...found: E:/PXD011691_Vitek/Canonical_2023\msn_files\FLI_180508_JMK_Biognosys_new_prep_Brain_TMT10_10fr_HpH_fr9.PAW_tmt.txt
+...getting tmt data from: FLI_180508_JMK_Biognosys_new_prep_Brain_TMT10_10fr_HpH_fr9.PAW_tmt.txt
+...there were 1888 short peptides
+
+Conversion of 840281 scans has completed!
+
