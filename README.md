@@ -116,7 +116,7 @@ Oxidized Met is an important variable PTM to add. Note that PSM counts inflate h
 
 How you count things when you compare things is of critical importance. If we were to look at the data from each site separately, the PAW pipeline would require two peptides per protein. That would give the protein ID numbers above. When data from multiple TMT plexes are processed in the PAW pipeline, you want to take all of the 1% FDR filtered files and do a collective protein inference. The more PSMs we use, the more information we can bring to the inference logic. This also gives peptide and protein summary files with all of the data in one place (we do not have to merge tables). The protein ID criteria for the combined BGS and FLI data is two peptides per protein per plex. Proteins do not have to have 2 peptide in **both** plexes. This relaxes things slightly. The PAW pipeline also removes (zeroes out) some very low intensity reporter ion on a scan basis. We end up with a few proteins that meet the ID criteria but have no associated reporter ion data. We have a few more proteins that we can ID than we can quantify.
 
-When we want to talk about proteome depth and overlap between sites, it makes more sense to count quantifiable proteins (we are doing quantitative proteomics, right?). Wait a minute. Since we have quantities for each protein, should be count proteins or count total intensities? Yes. The union of all protein identifications from both sites was 6,796.
+When we want to talk about proteome depth and overlap between sites, it makes more sense to count quantifiable proteins (we are doing quantitative proteomics, right?). Wait a minute. Since we have quantities for each protein, should we count proteins or count total intensities? Yes. The union of all protein identifications from both sites was 6,796.
 
 Site|Quantifiable Proteins|Average Intensity per Sample
 ---|---|---
@@ -146,7 +146,7 @@ The BGS data was 6,539 proteins with 10 TMT values per protein for a total of 65
 
 #### Introduction
 
-Global dataset stats and tables of numbers are exciting to me, but others might prefer plots and figures. I completely decouple quantitative data **generation** from quantitative data analysis. The data generation in the PAW pipeline is all Python scripts because an actual programming language is better for that kind of data processing. Once properly summarized quantitative data is packaged in well-formed tables, R and Bioconductor tools can be used. Statistical tools and data visualizations are more mature in R compared to Python. Notebooks are an excellent way to bring transparency, reproducibility, and story telling to data analyses. Jupyter notebooks are what I use (RMarkdown is also an alternative).
+Global dataset stats and tables of numbers are exciting to me, but others might prefer plots and figures. I completely decouple quantitative data **generation** from quantitative data **analysis**. The data generation in the PAW pipeline is all Python scripts because an actual programming language is better for that kind of data processing. Once properly summarized quantitative data is packaged in well-formed tables, R and Bioconductor tools can be used. Statistical tools and data visualizations are more mature in R compared to Python. Notebooks are an excellent way to bring transparency, reproducibility, and story telling to data analyses. Jupyter notebooks are what I use (RMarkdown is also an alternative).
 
 During the five years I have been analyzing data with notebooks, I have learned a few things. Every experiment is different and flexibility is key. You have to so some homework and understand some of the biology and the experimental design. You need some domain knowledge to inform the data analysis steps. I am not talking about a high level of biological expertise for each experiment you analyze, just enough biology background to understand why the study was designed as such, and to see if there are any positive or negative controls you can leverage in evaluating the data analysis steps. The data generation steps are much simpler, with far fewer choices, than the data analysis steps. Software that tries to combine data generation and data analysis is usually brought to its knees by the trade offs taken to add some lowest common denominator data analysis framework. You end up with hard to use software that performs poorly.
 
@@ -169,7 +169,9 @@ PAW_IRS_log.txt|Combining BGS and FLI data with IRS log file
 PAW_protein_grouper.log|Extended parsimony protein grouping log file
 PAW_results.log|Basic parsimony protein grouping log file
 PAW_table_descriptions_9.txt|Descriptions of the tables written by PAW pipeline
+PXD011691_BGS_QC_checks.html|Data quality control checks for BGS TMT data
 PXD011691_BGS_QC_checks.ipynb|Data quality control checks for BGS TMT data
+PXD011691_FLI_QC_checks.html|Data quality control checks for BGS TMT data
 PXD011691_FLI_QC_checks.ipynb|Data quality control checks for BGS TMT data
 PXD011691_IRS_QC-checks.html|Data QC for combined BGS and FLI data
 PXD011691_IRS_QC-checks.ipynb|Data QC for combined BGS and FLI data
@@ -177,8 +179,6 @@ PXD011691_IRS_edgeR-exact.html|Statistical testing of mouse background proteins
 PXD011691_IRS_edgeR-exact.ipynb|Statistical testing of mouse background proteins
 PXD011691_grouped_protein_summary_TMT_9.xlsx|Sheet for prepping the quantitative data
 PXD011691_results_edgeR-exact.txt|Results of the testing of mouse background proteins
-PXD11691_BGS_QC_checks.html|Data quality control checks for BGS TMT data
-PXD11691_FLI_QC_checks.html|Data quality control checks for BGS TMT data
 ThresholdFigures|Folder of delta-mass and conditional score histograms
 add_TMT_intensities_log.txt|Protein summarization of reporter ions log file
 comet.params|Comet search engine parameters file
