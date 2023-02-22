@@ -11,7 +11,9 @@ PAW_IRS_log.txt|Combining BGS and FLI data with IRS log file
 PAW_protein_grouper.log|Extended parsimony protein grouping log file
 PAW_results.log|Basic parsimony protein grouping log file
 PAW_table_descriptions_9.txt|Descriptions of the tables written by PAW pipeline
+PXD011691_BGS_QC_checks.html|Data quality control checks for BGS TMT data
 PXD011691_BGS_QC_checks.ipynb|Data quality control checks for BGS TMT data
+PXD011691_FLI_QC_checks.html|Data quality control checks for BGS TMT data
 PXD011691_FLI_QC_checks.ipynb|Data quality control checks for BGS TMT data
 PXD011691_IRS_QC-checks.html|Data QC for combined BGS and FLI data
 PXD011691_IRS_QC-checks.ipynb|Data QC for combined BGS and FLI data
@@ -19,8 +21,6 @@ PXD011691_IRS_edgeR-exact.html|Statistical testing of mouse background proteins
 PXD011691_IRS_edgeR-exact.ipynb|Statistical testing of mouse background proteins
 PXD011691_grouped_protein_summary_TMT_9.xlsx|Sheet for prepping the quantitative data
 PXD011691_results_edgeR-exact.txt|Results of the testing of mouse background proteins
-PXD11691_BGS_QC_checks.html|Data quality control checks for BGS TMT data
-PXD11691_FLI_QC_checks.html|Data quality control checks for BGS TMT data
 ThresholdFigures|Folder of delta-mass and conditional score histograms
 add_TMT_intensities_log.txt|Protein summarization of reporter ions log file
 comet.params|Comet search engine parameters file
