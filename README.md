@@ -14,9 +14,12 @@ I would like to thank Michael Steidel for recently reminding me of this paper as
 
 ## Contents:
 - Disclaimers
+- Paper review
 - TMT Data
-  - Proteome depths
+  - Processing overview
+  - Proteome depths/overlap
   - Missing data
+  - Data quality
   - Comparison between sites
 - DIA Data
   - Same metrics as TMT
@@ -24,14 +27,114 @@ I would like to thank Michael Steidel for recently reminding me of this paper as
   - Still thinking about this
 - Conclusions
 
+---
+
 ## Disclaimers
 
 No paper is ever 100% right or 100% wrong. I liked many things about the data from this paper. Ten biological replicates of a mouse brain (cerebellum) background was great. I think the most can be learned from the unchanging background proteins when evaluating data processing and normalizations. Comparing single-shot DIA to a fractionated TMT experiment is a fair way to compare because they use the same total amount of instrument time. These are also the typical use cases for both quant methods. Another interesting aspect was to run the same sample preparations at two lab sites using very similar instruments and instrument methods.
 
-It takes me many days (really) of effort to perform these reanalyses of published data. Being publicly critical of published work without doing a ton of careful work yourself is lazy and petty. The only fair thing is to pour over every detail in the paper and, if there is anything that could have been done better, to demonstrate that better results would have been obtained with the proposed changes. This can seem like a real "Reviewer 2" exercise, but it is not intended to be. The goal is not to single out the paper or its authors in a bad way. The goal is to show (hopefully) better data analysis methods so that the proteomics community can do even better work in the future. This is a tricky thread the needle situation and I apologize in advance if any feelings are hurt.     
+It takes me many days (really) of effort to perform these reanalyses of published data. Being publicly critical of published work without doing a ton of careful work yourself is lazy and petty. The only fair thing is to pour over every detail in the paper and, if there is anything that could have been done better, to demonstrate that better results would have been obtained with the proposed changes. This can seem like a real "Reviewer 2" exercise, but it is not intended to be. The goal is not to single out the paper or its authors in a bad way. The goal is to show (hopefully) better data analysis methods so that the proteomics community can do even better work in the future. This is a tricky thread the needle situation and I apologize in advance if any feelings are hurt.
+
+Everything below are my personal opinions.
+
+A comma is used as the thousands separator in numbers below (USA convention).    
 
 ---
 
+## Paper Review
+
+I will summarize important positive and negative things from the publication that are directly relevant to the data reanalysis. At this point in time I have done just the TMT data, so I will focus on those parts of the paper now and add more on DIA later. The sample prep seems good. The samples were processed in one lab and the final samples were run on LC-MS platforms at two lab sites (Biognosys (BGS) and Fritz Lipmann Institute (FLI)).  For the TMT samples, the common sample processing involved trypsin digestion, TMT 10-plex labeling, mixing labeled samples, and first dimension fractionation into 10 fractions.
+
+The samples were 10 commercial mouse cerebellum samples (biological replicates). Human UPS2 proteins were spiked in at low levels. There were 5 UPS2 dilutions done in duplicate. The analytical platform had different (but similar) LC systems and the same model mass specs (Thermo Orbitrap Fusion Lumos Tribrids). The same instrument method files were used at both sites.
+
+DIA data was generated in 10 single shot runs. A 6-fraction DDA analysis of a pooled sample was used for library creation with MaxQuant. DIA data was collected in a 2-hour run with 40 variable width MS2 windows. DIA data was analyzed with Spectronaut Pulsar X in both library and library-free modes. A common mouse Swiss-Prot FASTA file was used for library building or the library-free direct DIA analysis.
+
+The TMT data was generated using the SPS-MS3 method on the Lumos Tribrids. Instrument acquisition settings were the same. The second dimension low-pH reverse runs were 2 hours long. The TMT data was analyzed with Proteome Discoverer 2.2 using Mascot and the mouse Swiss-Prot FASTA file (about 17K sequences from 2016). Mascot settings were typical narrow (10 ppm) precursor tolerance and 0.5 Da for the ion trap MS2 fragments. Percolator post processing was used for PSM error control. Reporter ions were PD default of signal-to-noise ratios. Minimum peptide length was probably 6 (a PD default). Unique peptides only were used for quant. Some protein inference and error control option in PD (or maybe is was IDPicker post-processing the PSM export from PD?) must have been used but was not detailed.
+
+The sample to TMT channel key was not provided. The main summary tables in the manuscript have reporter ion median values as the protein summary values. I do not think this is an option in PD, so post-processing of the PD lower level data must have been done (details not provided). The PXD011691 repository had the RAW files and the PD MSF files. The MSF files are SQLite3 relational databases and meet the repository requirements. However, MSF files are intermediate files in PD since 2.x and cannot be viewed by newer PD viewers. No details about the PD analysis beyond what was described in the paper could be extracted.
+
+Much of the paper presents an analysis of the UPS2 proteins and mostly ignores the mouse background proteins. The UPS spike-in is not a great choice. The UPS proteins are human and they have a lot of sequence homology to their respective mouse orthologs. This creates additional shared peptide complications. UPS2 has 48 proteins in groups of 8 spanning 5 decades of concentration difference. On top of the built-in dilutions of UPS2 proteins, the UPS2 proteins were added to the mouse background in 5 different dilutions (just 2 replicates of each dilution). The dilution squared effect and overall low levels of UPS2 spike-in resulted in detection of only 12-19 UPS proteins across the DIA and TMT data. The low levels of UPS2 proteins and insufficient replicates for proper analysis make the UPS2 spike-in data of extremely limited utility. It is better to avoid this distraction and focus on the characteristics of the mouse background proteins.
+
+## TMT data Reanalysis
+
+### Processing Overview
+
+Many aspects of the TMT processing in the publication are problematic. Signal-to-noise ratios are not a proper unit of measurement, mouse Swiss-Prot FASTA file is incomplete, Mascot is not great for ion trap MS2 spectra, and how the data was summarized for protein level quant. It made sense to process the data through [my pipeline](https://github.com/pwilmart/PAW_pipeline) where the wrinkles of TMT data processing have been ironed out in 7+ years of use.
+
+Here are some of the parameter choices that make improvements:
+- more complete FASTA file (21K sequences vs 17K)
+- minimum peptide length of 7 amino acids
+- [wide precursor tolerance](https://pwilmart.github.io/blog/2021/04/22/Parent-ion-tolerance)
+- Comet search engine is more sensitive
+- accurate/sensitive PSM FDR control
+- two peptide per protein per plex rule
+- extended parsimony protein grouping
+- reporter ion peak heights (intensities)
+- reporter ion summing for protein quant
+- missing value handling
+
+What|BGS|FLI|PAW BGS|PAW FLI|Gain
+---|---|---|---|---|---
+MS2 scans|384,156|470,691|384,156|470,691
+1% FDR Scans|114,371|125,425|143,285|151,071|23%
+PSM ID rate|29.8%|26.6%|37.3%|32.1%
+Peptides|65,837|65,633|67,206|68,212|3%
+Proteins<br>2 peptides/protein|5,938|5,837|6,319|6,271|7%
+
+I am not sure that peptide sequence counting was done the same way (I don't usually count peptides). It is clear that the PAW processing is better.
+
+The PAW pipeline breaks the FDR analysis into peptide subclasses (deltamass windows, charge state, modification state) and it can be fun to see what fractions of the PSMs fall into the different subclasses.
+
+Charge|Fraction
+---|---
+2+|46.6%
+3+|45.1%
+4+|8.3%
+
+TMT labels shift peptide charge state distribution to higher charges.
+
+Delta Mass Region|Fraction
+---|---
+0-Da narrow window|88.1%
+1-Da narrow window|9.5%
+Outside narrow windows|2.4%
+
+Most peptides have very good agreement between measured and predicted masses. There are quite a few PSMs with deamidated Asn and with C13 triggers. There are also many PSMs with inaccurate masses.
+
+Charge|Fraction with M+16
+---|---
+2+|18.3%
+3+|21.5%
+4+|23.2%
+All|20.1%
+
+Oxidized Met is an important variable PTM to add. Note that PSM counts inflate how much sample seems oxidized. Intensity-based estimates would be smaller.
+
+### Proteome Depth and Overlap Between Sites
+
+How you count things when you compare things is of critical importance. If we were to look at the data from each site separately, the PAW pipeline would require two peptides per protein. That would give the protein ID numbers above. When data from multiple TMT plexes are processed in the PAW pipeline, you want to take all of the 1% FDR filtered files and do a collective protein inference. The more PSMs we use, the more information we can bring to the inference logic. This also gives peptide and protein summary files with all of the data in one place (we do not have to merge tables). The protein ID criteria for the combined BGS and FLI data is two peptides per protein per plex. Proteins do not have to have 2 peptide in **both** plexes. This relaxes things slightly. The PAW pipeline also removes (zeroes out) some very low intensity reporter ion on a scan basis. We end up with a few proteins that meet the ID criteria but have no associated reporter ion data. We have a few more proteins that we can ID than we can quantify.
+
+When we want to talk about proteome depth and overlap between sites, it makes more sense to count quantifiable proteins (we are doing quantitative proteomics, right?). Wait a minute. Since we have quantities for each protein, should be count proteins or count total intensities? Yes. The union of all protein identifications from both sites was 6,796.
+
+Site|Quantifiable Proteins|Average Intensity per Sample
+---|---|---
+BGS|6,539|19,328,018,191
+FLI|6,504|42,620,258,349
+
+We have a few more proteins in the BGS data even though the intensities are less than half compared to the FLI data. Now we can ask of the proteins seen at each site, how many were unique to that site and how many were seen at the other site.
+
+Site|Quantity|Seen at both sites|Unique to site
+---|---|---|---
+BGS|Protein Count|6,270|269
+BGS|Count Percentages|95.9%|4.1%
+BGS|Protein Intensity|19,308,751,470|19,266,721
+BGS|Intensity Percentages|99.9%|0.1%
+FLI|Protein Count|6,504|234
+FLI|Count Percentages|96.4%|3.6%
+FLI|Protein Intensity|42,584,284,686|35,973,663
+FLI|Intensity Percentages|99.9%|0.1%
+
+If we count by number of proteins identified rather than number of proteins that are quantifiable, the percentage in the overlap is lower (about 92%). Restricting the counts to quantifiable proteins gets the overlap up to 96%, but plain counts inflate low abundance things. When we use quantitative values in the counting, we see that the proteins unique to each site are extremely low abundance (only 0.1% of the intensity total). The vast majority of the signal in each  
 
 
 ## Map to files in the repository
