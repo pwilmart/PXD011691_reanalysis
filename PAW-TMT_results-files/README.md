@@ -17,10 +17,13 @@ PXD011691_FLI_QC_checks.html|Data quality control checks for BGS TMT data
 PXD011691_FLI_QC_checks.ipynb|Data quality control checks for BGS TMT data
 PXD011691_IRS_QC-checks.html|Data QC for combined BGS and FLI data
 PXD011691_IRS_QC-checks.ipynb|Data QC for combined BGS and FLI data
-PXD011691_IRS_edgeR-exact.html|Statistical testing of mouse background proteins
-PXD011691_IRS_edgeR-exact.ipynb|Statistical testing of mouse background proteins
+PXD011691_IRS_edgeR-exact-random.html|Statistical testing of mouse background proteins
+PXD011691_IRS_edgeR-exact-random.ipynb|Statistical testing of mouse background proteins
+PXD011691_IRS_edgeR-exact-site.html|Statistical testing of mouse background proteins
+PXD011691_IRS_edgeR-exact-site.ipynb|Statistical testing of mouse background proteins
 PXD011691_grouped_protein_summary_TMT_9.xlsx|Sheet for prepping the quantitative data
-PXD011691_results_edgeR-exact.txt|Results of the testing of mouse background proteins
+PXD011691_results_edgeR-exact-random.txt|Results of the testing of mouse background proteins
+PXD011691_results_edgeR-exact-site.txt|Results of the testing of mouse background proteins
 ThresholdFigures|Folder of delta-mass and conditional score histograms
 add_TMT_intensities_log.txt|Protein summarization of reporter ions log file
 comet.params|Comet search engine parameters file
