@@ -21,6 +21,7 @@ I would like to thank Michael Steidel for recently reminding me of this paper as
   - Missing data
   - Data quality
   - Comparison between sites
+  - UPS2 spike-in
 - DIA Data
   - Try to use similar protein summarization as TMT
   - Use newer DIA Software
@@ -74,6 +75,8 @@ Here are some of the parameter choices that make improvements:
 - reporter ion peak heights (intensities)
 - reporter ion summing for protein quant
 - missing value handling
+
+> Definition of "plex". A set of samples labeled by one TMT regent kit (6-plex, 10-plex, 11-plex, 16-plex, or 18-plex) is a plex. A plex may be analyzed by one or more LC-MS runs. A TMT experiment may be one or more than one plex. Multiple plexes are used to accommodate more biological samples than can fit into a single TMT labeling kit.
 
 What|BGS|FLI|PAW BGS|PAW FLI|Gain
 ---|---|---|---|---|---
@@ -193,15 +196,99 @@ A nearly universal given in these experiments is that the biological replicates 
 
 ![BGS scatter plot grids](images/Slide3.png)
 
+We expect properly summarized and normalized TMT data from a single plex to be very precise. We also expect decent accuracy and dynamic range when using the SPS-MS3 instrument method available on Thermo Orbitrap Tribrid instruments. We have replicate 1 samples of the 5 UPS2 spike-in levels from the BGS data. On the left, we have all proteins (mouse and UPS2); on the right, we have just the mouse background proteins. In the bottom row of the left panel, the handful of proteins above the diagonal trend line are the UPS proteins. They are missing in the bottom row of the right panel were we do not have any UPS2 proteins.
+
 ![FLI scatter plot grids](images/Slide4.png)
+
+These are similar plots from the FLI data with the replicate 2 samples. The pattern is the same. Note: the correlation coefficient is not a very sensitive metric. We can tell far more with our eyes as to what samples have tighter scatter plots.
 
 ![Average scatter plot grid](images/Slide5.png)
 
+Another thing we can do is to average intensities by biological group and do scatter plots of the average vectors. This lets us get a heads up on the statistical testing by seeing which groups are similar or different. We do not have any biological groups in this experiment, so we can compare the sample replicates. We see that the proteomes of technical replicates are very similar. That is true at both sites and whether we have all proteins or just mouse proteins. There are a few proteins off of the diagonal trend line, but the vast majority of the 6,260 proteins are very similar over almost 6 decades of intensity dynamic range.
+
 ### Comparison between Sites
 
-#### How?
+#### How do we do that?
 
+IRS (internal reference scaling) can do practically anything, so we will use that. The study design did not have reference channels per se. The same 10 samples were run at both sites, so any of the 10 channels could be considered as reference (or bridge) channels. I picked the two S5 replicates in each plex as the proxies for the IRS channels. The sample key was not presented in the paper or related files. However, the UPS2 levels in the S5 samples made them easy to find. We compute the scaling factors from the average of the S5 channels in each plex. We apply those factors to the other 8 channels in each plex. The scaling factors for the 8 channels and the data from the 8 channels are independent because we did not use any data from the 8 channels to compute the factors. Keep in mind that any uncertainties or errors in the scaling factors derived from the S5 samples directly propagate into the 8 channels collectively. This is why it is recommended to use two reference channels per plex to average and reduce uncertainties in the scaling factors.   
 
+![Clustering by site](images/Slide6.png)
+
+The IRS method was [published in 2017](https://www.mcponline.org/article/S1535-9476(20)32393-8/fulltext). I have a lot of content at [my Github site](https://github.com/pwilmart) that talks about IRS. We will do a quick summary for this data. In the cluster view above, before IRS (left panel) we have the samples clustering by BGS site (left side) or FLI site (right side). After IRS (right panel), the S5 samples in black are clustering together (the **averages** of the two channels per site are now identical). The other samples are no longer stacked on the sides of the plot.
+
+![S5 before and after](images/Slide7.png)
+
+TMT measurements within a plex are very precise because they are measured simultaneously in a single instrument scan. In the left panel above, the top left and bottom right scatter plots are the two S5 biological replicates within each plex. The lower left 4 scatter plots are of samples between plexes. The pseudo-random MS2 sampling creates dramatically different intensities in each plex. Data between plexes cannot be directly compared without IRS. After IRS (right panel), samples within and between plexes look the same. The two scatter plots with the red dots are the same samples measured between the two sites (true technical replicates). They have tighter scatter plots that the other 4 which are biological replicates.
+
+![S1 before and after](images/Slide8.png)
+
+We can look at a few of the other biological samples and see what effect the IRS method (with scaling factors computed only from the S5 samples) had on the data. These are the S1 samples. The effect is similar to what we saw for S5 above. The scatter plots with red dots are the technical replicates from different plexes.
+
+![S4 before and after](images/Slide9.png)
+
+These are the S4 samples. The effect is similar to what we saw for S5 above. The scatter plots with red dots are the technical replicates from different plexes. There are more plots in the actual Jupyter notebooks.
+
+#### Comparison of sites using random group assignments
+
+We outlined how we can combine the data from the two sites using the S5 channels above. Now that we have the data from both sites on a common intensity scale, we can create some statistical testing scenarios and see how the constant mouse background behaves. In the first scenario, we will randomly take 8 of the 16 biological samples to be one group and the other 8 to be the second group. This would mimic a block randomized study where samples from each group would be distributed amongst the plexes.
+
+![Boxplot+cluster, random groups](images/Slide10.png)
+
+We see that IRS plus TMM normalization results in nicely aligned box plots (left). The samples in the two groups (one read and the other blue) do not show separate clusters (right panel).
+
+![MAplot+bar plots, random groups](images/Slide11.png)
+
+We do not have any statistically significant differential abundance protein candidates after doing an exact test in edgeR. Benjamini-Hochberg multiple testing correction was used. Bar plots of the protein intensity per sample for two proteins are shown on the right. We have little abundance difference between groups.
+
+#### Group assignments by site
+
+It is possible that IRS is an overly aggressive adjustment and that we have artificially removed all true differences. A worst case scenario in study designs is a completely unbalanced study where all of the samples for each group are each in single batches. The TMT 10-plexes done at different sites is one of these unbalanced study cases. We can do IRS on the S5 samples and then compare the samples from each site to each other.
+
+![Boxplot+cluster, random groups](images/Slide12.png)
+
+The box plots on the left still look great. We now see that there is some clustering of the samples by site with the BGS samples in red separated a little from the FLI samples in blue.
+
+![MAplot+p values, random groups](images/Slide13.png)
+
+We have 182 Up candidates in red and 183 Down candidates in blue (MA plot on the left) at an FRD cutoff of 0.05. Many of these have pretty small fold changes and only a few proteins have larger fold changes. The median fold change of the candidates is 1.2. We still have 95% of the proteins that are not statistically significant. The p-value distribution on the right has two distributions: a flat distribution from 0 to 1 from unchanged proteins and a spike in small p-values from putative true DE candidates.
+
+![Facet plots](images/Slide14.png)
+
+You can make a variety of data plots to highlight candidates in these TMT experiments. Here we have categorized DE candidates by FDR cutoffs (purple > 0.10 teal > 0.05 > moss > 0.01 > orange) and made facet plots in ggplot2. The left panel is based on an MA plot and the right panel is based on a scatter plot.
+
+![Bar plots](images/Slide15.png)
+
+The protein abundance differences we are seeing from a set of constant background proteins when we grouped samples by site after IRS is likely due to uncertainties/errors in the S5 intensity measurements (what we used as our standards). All of the biological samples in each plex get collectively adjusted the the scaling factor. While IRS may not be perfect, it is hard to imagine any better alternatives. Ratios of biological samples to a reference channel within a plex does not eliminate this issue. The uncertainties in the reference channel propagate into uncertainties in the ratios. The effects are the same. They are easier to see and understand with IRS.
+
+> If you think combining the data from both sites is unnecessarily complex, that might be a fair thought. We can take the data from each site by itself and test for any DE candidates by randomly assigning the samples to two groups of 5. That completely eliminates any complications from IRS. We can then do the same edgeR workup. That yielded zero DE candidates for the BGS site (FDR < 0.05) and one DE candidate for the FLI site (FDR < 0.05). The edgeR analysis results in essentially no false positive DE candidates from the mouse background for more than 6,000 proteins.
+
+### UPS2 spike-in
+
+Okay, what about the UPS2 proteins. I am sure some of you just can't let that go. My reanalysis only picked up 18 of the 48 proteins. I could probably do an analysis in edgeR with just two replicates per spike-in, but it is not very robust. Since my pipeline keeps the data in more natural intensity scales we can compare the total intensity of UPS2 proteins to the total intensity of mouse proteins in each sample. We can compare that to the known spike-in levels.
+
+The sample key (what channel corresponded to what spike-in sample) was not clearly listed in the paper. I ended up ranking UPS2 intensities and assigning spike-in level based on that. There was not much difference between S1, S2 or S3 levels and ranking those may not be 100% certain. S4 and S5 are pretty obvious.
+
+**BGI Site:**
+
+Spike-In|Mouse Intensity|UPS2 Intensity|Fraction|Relative to S1|Known Level
+---|---|---|---|---|---
+S1|21,248,057,406|25,359,491|0.1193%|100%|100%
+S2|19,540,659,979|27,034,648|0.1384%|116%|110%
+S3|21,910,409,759|34,782,794|0.1588%|133%|144%
+S4|21,502,552,440|43,904,294|0.2042%|171%|272%
+S5|21,491,851,488|135,621,796|0.6310%|529%|1006%
+
+**FLI Site:**
+
+Spike-In|Mouse Intensity|UPS2 Intensity|Fraction|Relative to S1|Known Level
+---|---|---|---|---|---
+S1|46,629,549,203|59,327,416|0.1272%|100%|100%
+S2|42,987,989236|65,491,056|0.1523%|120%|110%
+S3|48,610,778,705|85,054,043|0.1750%|138%|144%
+S4|47,251,367,609|108,671,408|0.2300%|181%|272%
+S5|47,769,914,311|333,755,423|0.6987%|549%|1006%
+
+I am not sure if I believe the spike-in data enough to worry about the results. The trend seems okay. The S5 and S4 measured levels are low compared to the known levels. I have seen enough SPS-MS3 data to think it works better than maxing out at 5-fold changes. I will need to see how the DIA data does and revisit this later.
 
 ## Map to files in the PAW-TMT_results-files folder
 
