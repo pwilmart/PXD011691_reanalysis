@@ -156,8 +156,36 @@ I have settled on a two notebook data analysis strategy. One notebook looks at d
 
 We will first look at the TMT data from each site independently. I created a combined grouped protein summary with all of the runs from both sites to get the best protein inference and to make sure that the quantitative protein data from each site was aligned to the same list of proteins. That summary table was opened in Excel for additional data filtering. There are always additional keratins identified that are not automatically mapped to the keratins in the common contaminants. Those get flagged as additional contaminants. There can be other classes of proteins that may or may not be contaminants depending on the samples, such as, hemoglobins and serum albumin. I always double check what proteins should or should not be flagged as contaminants. Excel's column filters make this easy. As I mentioned above, we identify more proteins than we can quantify. Some proteins do not have any quantitative data and need to be excluded. After these decisions about what proteins to quantify and which to exclude are made, the data from each site was packaged into simple tables (saved as tab-delimited text files) for loading into the notebooks. These tables have a column to denote the protein (the accessions) and 10 columns of TMT intensity values. The column labels were labeled by sample names instead of TMT tags to make the notebooks easier to understand.
 
-Coefficients of Variance (CVs) are another good metric for evaluating data before and normalizations. The median CV was lowered from 8.8% to 5.8% for the BGS site, and lowered from 8.9% to 6.1% for the FLI data. Animal model systems are used because most biological variability is removed. We expect mice data to have lower variability compared to human samples. That said, a 6% CV is very low. I have worked with TMT data for brain samples in the past (both human and mice) and brain samples seem to have lower variability compared to most other tissues.
+##### TMM normalization
 
+Normalizations are usually needed with these large-scale quantitative datasets. There are many normalization algorithms to choose from and some (only a few) of those are compatible with these types of experiments. I like the [trimmed mean of M-values method](https://genomebiology.biomedcentral.com/articles/10.1186/gb-2010-11-3-r25) that is part of the [edgeR Bioconductor](https://bioconductor.org/packages/release/bioc/html/edgeR.html) package.
+
+> Robinson, M.D. and Oshlack, A., 2010. A scaling normalization method for differential expression analysis of RNA-seq data. Genome biology, 11(3), p.R25.
+
+Boxplots of the log10 protein intensities are one way to evaluate the data before and after normalizations. Good alignment of the distributions (horizontally matched medians, matched interquartile ranges, matched whiskers) is a necessary but not sufficient requirement. You can have great looking boxplots and still have unusable data.
+
+##### Clustering plots
+
+Clustering by biological groups is a powerful way to find batch effects and other issues with your samples. That makes sense when there are actual biological groups. In this experiment, we have 10 biological replicates of normal mouse brain as a constant background that makes up the bulk of the samples. The human UPS2 proteins are spiked in at such low levels that only 18 of the 48 could be identified. They do not have much effect on the clustering and the views are not interesting for this experiment.
+
+##### Coefficients of Variance
+
+Coefficients of Variance (CVs) within biological groups are another good metric for evaluating data before and normalizations. We only have one group of 10 samples in practical terms here. The median CV was lowered from 8.8% to 5.8% for the BGS site, and lowered from 8.9% to 6.1% for the FLI data. Animal model systems are used because most biological variability is removed. We expect mice data to have lower variability compared to human samples. That said, a 6% CV is very low. I have worked with TMT data for brain samples in the past (both human and mice) and brain samples seem to have lower variability compared to most other tissues.
+
+**Ballpark Median CVs by sample types:** I have seen many types of samples in the 7+ years of analyzing TMT datasets (all SPS-MS3 acquisition) and have some typical numbers for Cvs. Some types of samples are easier to collect and work with than others when looking at animal and human systems and that is reflected in CVs.
+
+Sample Type|Ballpark Median CV
+---|---
+Technical replicates|3%
+Cell Cultures|5-6%
+Good animal model samples|Upper single digits
+Less easy animal model samples|Low teens
+Good human samples|20-30%
+Less good human samples|40-60%
+
+##### Sample-to-sample scatter plots
+
+A nearly universal given in these experiments is that the biological replciates within a biological groups should be "similar". What do we mean by similar? We mean that the relative abundance estimates for all proteins should be similar. Sample-to-sample scatter plots of the log10 protein intensities work well to check that. There are scatter plot grid functions in R that make this easy to do. I like the `pairs.panels` function from the `pysch` library. This function makes plots with distribution histograms on the diagonal, scatter plots below the diagonal, and correlation coefficients above the diagonal. 
 
 
 ## Map to files in the PAW-TMT_results-files folder
