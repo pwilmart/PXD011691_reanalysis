@@ -185,7 +185,8 @@ Less good human samples|40-60%
 
 ##### Sample-to-sample scatter plots
 
-A nearly universal given in these experiments is that the biological replciates within a biological groups should be "similar". What do we mean by similar? We mean that the relative abundance estimates for all proteins should be similar. Sample-to-sample scatter plots of the log10 protein intensities work well to check that. There are scatter plot grid functions in R that make this easy to do. I like the `pairs.panels` function from the `pysch` library. This function makes plots with distribution histograms on the diagonal, scatter plots below the diagonal, and correlation coefficients above the diagonal. 
+A nearly universal given in these experiments is that the biological replicates within a biological groups should be "similar". What do we mean by similar? We mean that the relative abundance estimates for all proteins should be similar. Sample-to-sample scatter plots of the log10 protein intensities work well to check that. There are scatter plot grid functions in R that make this easy to do. I like the `pairs.panels` function from the `pysch` library. This function makes plots with distribution histograms on the diagonal, scatter plots below the diagonal, and correlation coefficients above the diagonal.
+
 
 
 ## Map to files in the PAW-TMT_results-files folder
