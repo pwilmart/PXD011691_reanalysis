@@ -164,6 +164,10 @@ Normalizations are usually needed with these large-scale quantitative datasets. 
 
 Boxplots of the log10 protein intensities are one way to evaluate the data before and after normalizations. Good alignment of the distributions (horizontally matched medians, matched interquartile ranges, matched whiskers) is a necessary but not sufficient requirement. You can have great looking boxplots and still have unusable data.
 
+![Before TMM boxplots](images/Slide1.png)
+
+![After TMM boxplots](images/Slide2.png)
+
 ##### Clustering plots
 
 Clustering by biological groups is a powerful way to find batch effects and other issues with your samples. That makes sense when there are actual biological groups. In this experiment, we have 10 biological replicates of normal mouse brain as a constant background that makes up the bulk of the samples. The human UPS2 proteins are spiked in at such low levels that only 18 of the 48 could be identified. They do not have much effect on the clustering and the views are not interesting for this experiment.
@@ -186,6 +190,16 @@ Less good human samples|40-60%
 ##### Sample-to-sample scatter plots
 
 A nearly universal given in these experiments is that the biological replicates within a biological groups should be "similar". What do we mean by similar? We mean that the relative abundance estimates for all proteins should be similar. Sample-to-sample scatter plots of the log10 protein intensities work well to check that. There are scatter plot grid functions in R that make this easy to do. I like the `pairs.panels` function from the `pysch` library. This function makes plots with distribution histograms on the diagonal, scatter plots below the diagonal, and correlation coefficients above the diagonal.
+
+![BGS scatter plot grids](images/Slide3.png)
+
+![FLI scatter plot grids](images/Slide4.png)
+
+![Average scatter plot grid](images/Slide5.png)
+
+### Comparison between Sites
+
+#### How?
 
 
 
