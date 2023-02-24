@@ -162,7 +162,7 @@ I have settled on a two notebook data analysis strategy. One notebook looks at d
 
 #### QC metrics
 
-We will first look at the TMT data from each site independently. I created a combined grouped protein summary with all of the runs from both sites to get the best protein inference and to make sure that the quantitative protein data from each site was aligned to the same list of proteins. That summary table was opened in Excel for additional data filtering. There are always additional keratins identified that are not automatically mapped to the keratins in the common contaminants. Those get flagged as additional contaminants. There can be other classes of proteins that may or may not be contaminants depending on the samples, such as, hemoglobins and serum albumin. I always double check what proteins should or should not be flagged as contaminants. Excel's column filters make this easy. As I mentioned above, we identify more proteins than we can quantify. Some proteins do not have any quantitative data and need to be excluded. After these decisions about what proteins to quantify and which to exclude are made, the data from each site was packaged into simple tables (saved as tab-delimited text files) for loading into the notebooks. These tables have a column to denote the protein (the accessions) and 10 columns of TMT intensity values. The column labels were labeled by sample names instead of TMT tags to make the notebooks easier to understand.
+We will first look at the TMT data from each site independently. I created a combined grouped protein summary with all of the runs from both sites to get the best protein inference and to make sure that the quantitative protein data from each site was aligned to the same list of proteins. That summary table was opened in Excel for additional data filtering. There are always some keratins identified that are not automatically mapped to the keratins in the common contaminants. Those get flagged as additional contaminants. There can be other classes of proteins that may or may not be contaminants depending on the samples, such as, hemoglobins and serum albumin. I always double check what proteins should or should not be flagged as contaminants. Excel's column filters make this easy. As I mentioned above, we identify more proteins than we can quantify in DDA methods. Some proteins do not have any quantitative data and need to be excluded. After these decisions about what proteins to quantify and which to exclude are made, the data from each site was packaged into simple tables (saved as tab-delimited text files) for loading into the notebooks. These tables have a column to denote the protein (the accessions) and 10 columns of TMT intensity values. The columns were labeled by sample names instead of TMT tags to make the notebooks easier to understand.
 
 ##### TMM normalization
 
@@ -176,15 +176,19 @@ Boxplots of the log10 protein intensities are one way to evaluate the data befor
 
 ![After TMM boxplots](images/Slide2.png)
 
+TMM normalization results in better horizontal alignment of data distributions (notches, boxes, and whiskers all line up).
+
 ##### Clustering plots
 
-Clustering by biological groups is a powerful way to find batch effects and other issues with your samples. That makes sense when there are actual biological groups. In this experiment, we have 10 biological replicates of normal mouse brain as a constant background that makes up the bulk of the samples. The human UPS2 proteins are spiked in at such low levels that only 18 of the 48 could be identified. They do not have much effect on the clustering and the views are not interesting for this experiment.
+Clustering by biological groups is a powerful way to find batch effects and other issues with your experiment. That makes sense when there are actual biological groups. In this experiment, we have 10 biological replicates of normal mouse brain as a constant background that makes up the bulk of the samples. The human UPS2 proteins are spiked in at such low levels that only 18 of the 48 could be identified. They do not have much effect on the clustering and the views are not so interesting for this experiment.
 
 ##### Coefficients of Variance
 
-Coefficients of Variance (CVs) within biological groups are another good metric for evaluating data before and normalizations. We only have one group of 10 samples in practical terms here. The median CV was lowered from 8.8% to 5.8% for the BGS site, and lowered from 8.9% to 6.1% for the FLI data. Animal model systems are used because most biological variability is removed. We expect mice data to have lower variability compared to human samples. That said, a 6% CV is very low. I have worked with TMT data for brain samples in the past (both human and mice) and brain samples seem to have lower variability compared to most other tissues.
+Coefficients of Variance (CVs) within biological groups is another good metric for evaluating data before and normalizations. We only have one group of 10 samples in practical terms here. The median CV was lowered from 8.8% to 5.8% for the BGS site, and lowered from 8.9% to 6.1% for the FLI data. Animal model systems are used partly because biological variability is reduced. We expect mice data to have lower variability compared to human samples. That said, a 6% CV is very low, even for mice samples. I have worked with brain sample TMT data in the past (both human and mice) and brain samples seem to have lower variability compared to most other tissues.
 
-**Ballpark Median CVs by sample types:** I have seen many types of samples in the 7+ years of analyzing TMT datasets (all SPS-MS3 acquisition) and have some typical numbers for Cvs. Some types of samples are easier to collect and work with than others when looking at animal and human systems and that is reflected in CVs.
+I have seen many types of samples in the 7+ years of analyzing TMT datasets (all SPS-MS3 acquisition) and have some typical numbers for Cvs. Some types of samples are easier to collect and work with than others when looking at animal and human systems and that is reflected in the CVs.
+
+**Ballpark Median CVs by sample types:** 
 
 Sample Type|Ballpark Median CV
 ---|---
