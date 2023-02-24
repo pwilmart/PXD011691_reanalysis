@@ -79,6 +79,8 @@ Here are some of the parameter choices and pipeline features that I thought woul
 
 > Definition of "plex". A set of samples labeled by one TMT regent kit (6-plex, 10-plex, 11-plex, 16-plex, or 18-plex) is a plex. A plex may be analyzed by one or more LC-MS runs. A TMT experiment may be one or more than one plex. Multiple plexes can be used to accommodate more biological samples than can fit into a single TMT labeling kit.
 
+**Dataset summary numbers**
+
 What|BGS|FLI|PAW BGS|PAW FLI|Gain
 ---|---|---|---|---|---
 MS2 scans|384,156|470,691|384,156|470,691
@@ -87,9 +89,9 @@ PSM ID rate|29.8%|26.6%|37.3%|32.1%
 Peptides|65,837|65,633|67,206|68,212|3%
 Proteins<br>2 peptides/protein|5,938|5,837|6,319|6,271|7%
 
-I am not sure that peptide sequence counting was done the same way (I don't usually count peptides). It is clear that the PAW processing is better.
+I am not sure that peptide sequence counting was done the same way (I don't usually count peptides). It is clear that the PAW processing identified more PSMs and ultimately more peptides and proteins.
 
-The PAW pipeline splits the FDR analysis into peptide subclasses (deltamass windows, charge state, modification state) and it can be instrucutve to see what fractions of the PSMs fall into the different subclasses.
+The PAW pipeline splits the FDR analysis into peptide subclasses (deltamass windows, peptide charge states, and peptide modification states) and it can be instrucutve to see what fractions of the PSMs fall into the different subclasses.
 
 Charge|Fraction
 ---|---
@@ -105,7 +107,7 @@ Delta Mass Region|Fraction
 1-Da narrow window|9.5%
 Outside narrow windows|2.4%
 
-Most peptides have very good agreement between measured and predicted masses. There are quite a few PSMs with deamidated Asn and with C13 triggers (nominal 1-Da delta masses). There are also many PSMs with inaccurate masses (this can depend on the instrument method options).
+Most peptides have very good agreement between measured and predicted masses (0-Da delta masses). There are quite a few PSMs with deamidated Asn and with C13 triggers (nominal 1-Da delta masses). There are also many PSMs with inaccurate masses (this can depend on the instrument method options). Note that I do not measure delta masses in PPM because that has no useful physical meaning to me.
 
 Charge|Fraction with M+16
 ---|---
@@ -118,9 +120,11 @@ Oxidized Met is an important variable PTM to add due to its prevalence in most s
 
 ### Proteome Depth and Overlap Between Sites
 
-How you count things when you compare things is of critical importance. If we were to look at the data from each site separately, the PAW pipeline would require two peptides per protein. That would give the protein ID numbers above. When data from multiple TMT plexes are processed in the PAW pipeline, you want to take all of the 1% FDR filtered files and do a collective protein inference. The more PSMs we use, the more information we can bring to the inference logic. This also gives peptide and protein summary files with all of the data in one place (we do not have to merge tables). The protein ID criteria for the combined BGS and FLI data is two peptides per protein per plex. Proteins do not have to have 2 peptide in **both** plexes. This relaxes things slightly. The PAW pipeline also removes (zeroes out) some very low intensity reporter ion on a scan basis. We end up with a few proteins that meet the ID criteria but have no associated reporter ion data. We have a few more proteins that we can ID than we can quantify.
+How you count things when you compare things is of critical importance. If we were to look at the data from each site separately, the PAW pipeline would require two peptides per protein. That would give the protein ID numbers above. When data from multiple TMT plexes are processed in the PAW pipeline, you want to take all of the 1% FDR filtered files and do a collective protein inference. The more PSMs we use, the more information we can bring to the inference logic. This also gives peptide and protein summary files with all of the data in one place (we do not have to merge tables). The protein ID criteria for the combined BGS and FLI data is two peptides per protein **per plex**. Proteins do not have to have 2 peptide in **both** plexes. This relaxes things slightly. The PAW pipeline also removes (zeroes out) some very low intensity reporter ion on a scan basis. We end up with a few proteins that meet the ID criteria but have no associated reporter ion data. We have a few more proteins that we can ID than we can quantify.
 
-When we want to talk about proteome depth and overlap between sites, it makes more sense to count quantifiable proteins (we are doing quantitative proteomics, right?). Wait a minute. Since we have quantities for each protein, should we count proteins or count total intensities? We will do it both ways and see. The union of all protein identifications from both sites was 6,796.
+> A fractionated TMT plex MS analysis looks like a classic MudPIT experiment of a biological sample. Because the TMT channels are hidden from the search engine and its output processing, there is some equivalence between a TMT plex and a label free "sample". I might unintentionally refer to a TMT plex as a "sample" when I am **not** referring to the TMT channels. 
+
+When we want to talk about proteome depth and overlap between sites, it makes more sense to count quantifiable proteins (we are doing quantitative proteomics, right?). Wait a minute. Since we have quantities for each protein, should we count protein identifications or count by total intensities? We will do it both ways and see. The union of all protein identifications from both sites was 6,796.
 
 Site|Quantifiable Proteins|Average Intensity per Sample
 ---|---|---
