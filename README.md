@@ -6,9 +6,9 @@ The data is from [this paper](https://pubs.acs.org/doi/abs/10.1021/acs.jproteome
 
 > Muntel, J., Kirkpatrick, J., Bruderer, R., Huang, T., Vitek, O., Ori, A. and Reiter, L., 2019. Comparison of protein quantification in a complex background by DIA and TMT workflows with fixed instrument time. Journal of proteome research, 18(3), pp 1340-1351.
 
-The paper compares 10 single shot DIA runs to a 10-fraction TMT-labeling experiment using the same biological replicate samples of a mouse brain background. The samples were run in two labs using similar LC and mass spec systems. Note: [human UPS2](https://www.sigmaaldrich.com/US/en/technical-documents/technical-article/protein-biology/protein-mass-spectrometry/ups1-and-ups2-proteomic) proteins were spiked-in to the mouse background (more on this below).
+The paper compares 10 single shot DIA runs to a 10-fraction TMT-labeling experiment using biological replicate samples of a mouse brain background. The samples were run in two labs using similar LC and mass spec systems. [Human UPS2](https://www.sigmaaldrich.com/US/en/technical-documents/technical-article/protein-biology/protein-mass-spectrometry/ups1-and-ups2-proteomic) proteins were spiked-in to the mouse background (more on this below).
 
-I would like to thank Michael Steidel for recently reminding me of this paper as a rather fair comparison of DIA and TMT quantitative methods. I had grabbed the TMT RAW files back in October 2019 and processed the data. I am guessing that I lost interest in the reanalysis because of the UPS2 proteins (more on that below). A recent [blog-like post](https://github.com/pwilmart/Human-plasma_DIA-vs-TMT) comparing DIA and TMT sparked interest in a data revisit.
+I would like to thank Michael Steidel for recently reminding me of this paper as a more fair comparison of DIA and TMT quantitative methods. I had grabbed the TMT RAW files way back in October 2019 and processed the data with my Comet/PAWs pipeline. I am guessing that I lost interest in the reanalysis because of the UPS2 proteins (more on that below). A recent [blog-like post](https://github.com/pwilmart/Human-plasma_DIA-vs-TMT) comparing DIA and TMT sparked interest in a revisit of the data.
 
 ---
 
@@ -20,6 +20,7 @@ I would like to thank Michael Steidel for recently reminding me of this paper as
   - Proteome depths/overlap
   - Missing data
   - Data quality
+  - Controlling false positives
   - Comparison between sites
   - UPS2 spike-in
 - DIA data
@@ -34,9 +35,9 @@ I would like to thank Michael Steidel for recently reminding me of this paper as
 
 ## Disclaimers
 
-No paper is ever 100% right or 100% wrong. I liked many things about the data from this paper. Ten biological replicates of a mouse brain (cerebellum) background was great. I think the most can be learned from the unchanging background proteins when evaluating data processing and normalizations. Comparing single-shot DIA to a fractionated TMT experiment is a fair way to compare because they use the same total amount of instrument time. These are also the typical use cases for both quant methods. Another interesting aspect was to run the same sample preparations at two lab sites using very similar instruments and instrument methods.
+No paper is ever 100% right or 100% wrong. I liked many things about the data from this paper. Ten biological replicates of a mouse brain (cerebellum) background was great. I think a lot can be learned from the unchanging background proteins when evaluating data processing and normalizations. Comparing single-shot DIA to a fractionated TMT experiment is a fair way to compare the methods because they use similar total amounts of instrument time. These are also the typical use cases for both quant methods. Another interesting aspect was to run the same sample preparations at two lab sites using very similar instruments and instrument methods.
 
-It takes me many days (really) of effort to perform these reanalyses of published data. Being publicly critical of published work without doing a ton of careful work yourself is lazy and petty. The only fair thing is to pour over every detail in the paper and, if there is anything that could have been done better, to demonstrate that better results would have been obtained with the proposed changes. This can seem like a real "Reviewer 2" exercise, but it is not intended to be. The goal is not to single out the paper or its authors in a bad way. The goal is to show (hopefully) better data analysis methods so that the proteomics community can do even better work in the future. This is a tricky "thread the needle" situation and I apologize in advance if any feelings are hurt.
+It takes me several days to perform these reanalyses of published data. Being publicly critical of published work without doing some work yourself is lazy and petty. It is better to pour over the paper and, if there is anything that could have been done better, to demonstrate that better results would have been obtained with the proposed changes. This can seem like a real "Reviewer 2" exercise, but it is not intended to be. The goal is not to single out the paper or its authors in a bad way. The goal is to show (hopefully) better data analysis methods so that the proteomics community can do even better work in the future. This is a tricky "thread the needle" situation and I apologize in advance if any feelings are hurt.
 
 Everything below are my personal opinions.
 
@@ -48,35 +49,37 @@ A comma is used as the thousands separator in numbers below (USA convention).
 
 I will summarize important positive and negative things from the publication that are directly relevant to the data reanalysis. At this point in time I have done just the TMT data, so I will focus on those parts of the paper now and add more on DIA later. The sample prep seems good. The samples were processed in one lab and the final samples were run on LC-MS platforms at two lab sites (Biognosys (BGS) and Fritz Lipmann Institute (FLI)).  For the TMT samples, the common sample processing involved trypsin digestion, TMT 10-plex labeling, mixing labeled samples, and first dimension fractionation into 10 fractions.
 
-The samples were 10 commercial mouse cerebellum samples (biological replicates). Human UPS2 proteins were spiked in at low levels. There were 5 UPS2 dilutions done in duplicate. The analytical platform had different (but similar) LC systems and the same model mass specs (Thermo Orbitrap Fusion Lumos Tribrids). The same instrument method files were used at both sites.
+The samples were 10 commercial mouse cerebellum samples (biological replicates). Human UPS2 proteins were spiked in at low levels. There were 5 UPS2 dilutions done in duplicate. The analytical platform had similar LC systems and the same model mass specs (Thermo Orbitrap Fusion Lumos Tribrids). The same instrument method files were used at both sites. DIA and TMT experiments used the Lumos.
 
-DIA data was generated in 10 single shot runs. A 6-fraction DDA analysis of a pooled sample was used for library creation with MaxQuant. DIA data was collected in a 2-hour run with 40 variable width MS2 windows. DIA data was analyzed with Spectronaut Pulsar X in both library and library-free modes. A common mouse Swiss-Prot FASTA file was used for library building or the library-free direct DIA analysis.
+DIA data was generated in 10 single shot runs. A 6-fraction DDA analysis of a pooled sample was used for library creation with MaxQuant. DIA data was collected in a 2-hour run with 40 variable width MS2 windows. DIA data was analyzed with Spectronaut Pulsar X in both library and library-free modes. A common mouse Swiss-Prot FASTA file was used for library building or the library-free direct DIA analysis (and for the TMT data analysis).
 
-The TMT data was generated using the SPS-MS3 method on the Lumos Tribrids. Instrument acquisition settings were the same. The second dimension low-pH reverse runs were 2 hours long. The TMT data was analyzed with Proteome Discoverer 2.2 using Mascot and the mouse Swiss-Prot FASTA file (about 17K sequences from 2016). Mascot settings were typical narrow (10 ppm) precursor tolerance and 0.5 Da for the ion trap MS2 fragments. Percolator post processing was used for PSM error control. Reporter ions were PD default of signal-to-noise ratios. Minimum peptide length was probably 6 (a PD default). Unique peptides only were used for quant. Some protein inference and error control option in PD (or maybe is was IDPicker post-processing the PSM export from PD?) must have been used but was not detailed.
+The TMT data was generated using the SPS-MS3 method on the Lumos Tribrids. Instrument acquisition settings were the same at both sites. The second dimension low-pH reverse runs were 2 hours long. The TMT data was analyzed with Proteome Discoverer v2.2 (PD) using Mascot and the mouse Swiss-Prot FASTA file (about 17K sequences from 2016). Mascot settings were typical narrow (10 ppm) precursor tolerance and 0.5 Da for the ion trap MS2 fragments. Percolator post processing was used for PSM error control. Reporter ions were PD default of signal-to-noise ratios. Minimum peptide length was probably 6 (a PD default). Unique peptides only were used for quant. Some protein inference and error control options in PD (or maybe is was IDPicker post-processing the PSM export from PD?) must have been used but were not detailed.
 
-The sample to TMT channel key was not provided. The main summary tables in the manuscript have reporter ion median values as the protein summary values. I do not think this is an option in PD, so post-processing of the PD lower level data must have been done (details not provided). The PXD011691 repository had the RAW files and the PD MSF files. The MSF files are SQLite3 relational databases and meet the repository requirements. However, MSF files are intermediate files in PD since 2.x and cannot be viewed by newer PD viewers. No details about the PD analysis beyond what was described in the paper could be extracted.
+The sample to TMT channel key was not provided. The main summary tables in the manuscript have reporter ion median values as the protein summary values. I do not think this is an option in PD, so post-processing of the PD lower level data must have been done (details not provided). The PXD011691 repository had the RAW files and the PD MSF files. The MSF files are SQLite3 relational database files and meet the repository requirements. However, MSF files are intermediate files in PD since 2.x and cannot be viewed by newer PD viewers. No details about the PD analysis beyond what was described in the paper could be easily extracted from the SQLite3 file.
 
-Much of the paper presents an analysis of the UPS2 proteins and mostly ignores the mouse background proteins. The UPS spike-in is not a great choice. The UPS proteins are human and they have a lot of sequence homology to their respective mouse orthologs. This creates additional shared peptide complications. UPS2 has 48 proteins in groups of 8 spanning 5 decades of concentration difference. On top of the built-in dilutions of UPS2 proteins, the UPS2 proteins were added to the mouse background in 5 different dilutions (just 2 replicates of each dilution). The dilution squared effect and overall low levels of UPS2 spike-in resulted in detection of only 12-19 UPS proteins across the DIA and TMT data. The low levels of UPS2 proteins and insufficient replicates for proper analysis make the UPS2 spike-in data of extremely limited utility. It is better to avoid this distraction and focus on the characteristics of the mouse background proteins.
+Much of the paper presents an analysis of the UPS2 proteins and mostly ignores the mouse background proteins. The UPS2 spike-in was not a great choice. The UPS proteins are human and they have a lot of sequence homology to their respective mouse orthologs. This creates additional shared peptide complications (which the paper addressed). UPS2 has 48 proteins in groups of 8 spanning 5 decades of concentration difference (6 abundance tiers of 8 proteins). On top of the built-in dilutions of UPS2 proteins, the UPS2 proteins were added to the mouse background in 5 different dilutions (just 2 replicates of each dilution). The "dilution squared" effect and overall low levels of UPS2 spike-in proteins resulted in detection of only 12-19 UPS proteins across the DIA and TMT data. The low levels of UPS2 proteins and insufficient replicates for typical statistical analyses made the UPS2 spike-in data of extremely limited utility. I decided to avoid this distraction and focus on the characteristics of the mouse background proteins.
 
 ## TMT data reanalysis
 
 ### Processing overview
 
-Many aspects of the TMT processing in the publication are problematic. Signal-to-noise ratios are not a proper unit of measurement, mouse Swiss-Prot FASTA file is incomplete, Mascot is not great for ion trap MS2 spectra, and how the data was summarized for protein level quant. It made sense to process the data through [my pipeline](https://github.com/pwilmart/PAW_pipeline) where the wrinkles of TMT data processing have been ironed out in 7+ years of use.
+Many aspects of the TMT processing in the publication are problematic. Signal-to-noise ratios are not a proper unit of measurement, the mouse Swiss-Prot FASTA file is a bit incomplete, Mascot is not the best choice for ion trap MS2 spectra, and I did not like how the data was summarized for protein level quant. I processed the data through my [Comet/PAWs pipeline](https://github.com/pwilmart/PAW_pipeline) where the wrinkles of TMT data processing have been ironed out in 7+ years of use.
 
-Here are some of the parameter choices that make improvements:
+Here are some of the parameter choices and pipeline features that I thought would make improvements:
 - more complete FASTA file (21K sequences vs 17K)
 - minimum peptide length of 7 amino acids
 - [wide precursor tolerance](https://pwilmart.github.io/blog/2021/04/22/Parent-ion-tolerance)
 - Comet search engine is more sensitive
-- accurate/sensitive PSM FDR control
-- two peptide per protein per plex rule
+- accurate and sensitive PSM FDR control
+- two peptide per protein per plex rule for protein ID
 - extended parsimony protein grouping
 - reporter ion peak heights (intensities)
-- reporter ion summing for protein quant
-- missing value handling
+- reporter ion sums for protein quant values
+- integrated missing value handling
 
-> Definition of "plex". A set of samples labeled by one TMT regent kit (6-plex, 10-plex, 11-plex, 16-plex, or 18-plex) is a plex. A plex may be analyzed by one or more LC-MS runs. A TMT experiment may be one or more than one plex. Multiple plexes are used to accommodate more biological samples than can fit into a single TMT labeling kit.
+> Definition of "plex". A set of samples labeled by one TMT regent kit (6-plex, 10-plex, 11-plex, 16-plex, or 18-plex) is a plex. A plex may be analyzed by one or more LC-MS runs. A TMT experiment may be one or more than one plex. Multiple plexes can be used to accommodate more biological samples than can fit into a single TMT labeling kit.
+
+**Dataset summary numbers**
 
 What|BGS|FLI|PAW BGS|PAW FLI|Gain
 ---|---|---|---|---|---
@@ -86,9 +89,9 @@ PSM ID rate|29.8%|26.6%|37.3%|32.1%
 Peptides|65,837|65,633|67,206|68,212|3%
 Proteins<br>2 peptides/protein|5,938|5,837|6,319|6,271|7%
 
-I am not sure that peptide sequence counting was done the same way (I don't usually count peptides). It is clear that the PAW processing is better.
+I am not sure that peptide sequence counting was done the same way (I don't usually count peptides). It is clear that the PAW processing identified more PSMs and ultimately more peptides and proteins.
 
-The PAW pipeline breaks the FDR analysis into peptide subclasses (deltamass windows, charge state, modification state) and it can be fun to see what fractions of the PSMs fall into the different subclasses.
+The PAW pipeline splits the FDR analysis into peptide subclasses (deltamass windows, peptide charge states, and peptide modification states) and it can be instrucutve to see what fractions of the PSMs fall into the different subclasses.
 
 Charge|Fraction
 ---|---
@@ -104,7 +107,7 @@ Delta Mass Region|Fraction
 1-Da narrow window|9.5%
 Outside narrow windows|2.4%
 
-Most peptides have very good agreement between measured and predicted masses. There are quite a few PSMs with deamidated Asn and with C13 triggers. There are also many PSMs with inaccurate masses.
+Most peptides have very good agreement between measured and predicted masses (0-Da delta masses). There are quite a few PSMs with deamidated Asn and with C13 triggers (nominal 1-Da delta masses). There are also many PSMs with inaccurate masses (this can depend on the instrument method options). Note that I do not measure delta masses in PPM because that has no useful physical meaning to me.
 
 Charge|Fraction with M+16
 ---|---
@@ -113,20 +116,22 @@ Charge|Fraction with M+16
 4+|23.2%
 All|20.1%
 
-Oxidized Met is an important variable PTM to add. Note that PSM counts inflate how much sample seems oxidized. Intensity-based estimates would be smaller.
+Oxidized Met is an important variable PTM to add due to its prevalence in most sample preps. Note that PSM counts inflate how much sample seems oxidized. Intensity-based estimates would be smaller.
 
 ### Proteome depth and overlap between sites
 
-How you count things when you compare things is of critical importance. If we were to look at the data from each site separately, the PAW pipeline would require two peptides per protein. That would give the protein ID numbers above. When data from multiple TMT plexes are processed in the PAW pipeline, you want to take all of the 1% FDR filtered files and do a collective protein inference. The more PSMs we use, the more information we can bring to the inference logic. This also gives peptide and protein summary files with all of the data in one place (we do not have to merge tables). The protein ID criteria for the combined BGS and FLI data is two peptides per protein per plex. Proteins do not have to have 2 peptide in **both** plexes. This relaxes things slightly. The PAW pipeline also removes (zeroes out) some very low intensity reporter ion on a scan basis. We end up with a few proteins that meet the ID criteria but have no associated reporter ion data. We have a few more proteins that we can ID than we can quantify.
+How you count things when you compare things is of critical importance. If we were to look at the data from each site separately, the PAW pipeline would require two peptides per protein. That would give the protein ID numbers above. When data from multiple TMT plexes are processed in the PAW pipeline, you want to take all of the 1% FDR filtered files and do a collective protein inference. The more PSMs we use, the more information we can bring to the inference logic. This also gives peptide and protein summary files with all of the data in one place (we do not have to merge tables). The protein ID criteria for the combined BGS and FLI data is two peptides per protein **per plex**. Proteins do not have to have 2 peptide in **both** plexes. This relaxes things slightly. The PAW pipeline also removes (zeroes out) some very low intensity reporter ion on a scan basis. We end up with a few proteins that meet the ID criteria but have no associated reporter ion data. We have a few more proteins that we can ID than we can quantify.
 
-When we want to talk about proteome depth and overlap between sites, it makes more sense to count quantifiable proteins (we are doing quantitative proteomics, right?). Wait a minute. Since we have quantities for each protein, should we count proteins or count total intensities? Yes. The union of all protein identifications from both sites was 6,796.
+> A fractionated TMT plex MS analysis looks like a classic MudPIT experiment of a biological sample. Because the TMT channels are hidden from the search engine and its output processing, there is some equivalence between a TMT plex and a label free "sample". I might unintentionally refer to a TMT plex as a "sample" when I am **not** referring to the TMT channels. 
+
+When we want to talk about proteome depth and overlap between sites, it makes more sense to count quantifiable proteins (we are doing quantitative proteomics, right?). Wait a minute. Since we have quantities for each protein, should we count protein identifications or count by total intensities? We will do it both ways and see. The union of all protein identifications from both sites was 6,796.
 
 Site|Quantifiable Proteins|Average Intensity per Sample
 ---|---|---
 BGS|6,539|19,328,018,191
 FLI|6,504|42,620,258,349
 
-We have a few more proteins in the BGS data even though the intensities are less than half compared to the FLI data. Now we can ask of the proteins seen at each site, how many were unique to that site and how many were seen at the other site.
+We have a few more proteins in the BGS data even though the intensities are less than half compared to the FLI data. Of the proteins seen at each site, how many were unique to that site and how many were seen at the other site?
 
 Site|Quantity|Seen at both sites|Unique to site
 ---|---|---|---
@@ -139,11 +144,11 @@ FLI|Count Percentages|96.4%|3.6%
 FLI|Protein Intensity|42,584,284,686|35,973,663
 FLI|Intensity Percentages|99.9%|0.1%
 
-If we count by number of proteins identified rather than number of proteins that are quantifiable, the percentage in the overlap is lower (about 92%). Restricting the counts to quantifiable proteins gets the overlap up to 96%, but plain counts inflate low abundance things. When we use quantitative values in the counting, we see that the proteins unique to each site are extremely low abundance (only 0.1% of the intensity total). The vast majority of the signal at each site comes from proteins seen (and quantifiable) at both sites. DIA is supposed to remedy the poor reproducibility of identifications and quantifications in DDA experiments. Well, I don't see a problem that needs fixing with this data.
+We have about 6,800 total protein identifications (after protein grouping and excluding decoys/contamininants), there are about 6,500 identified at each site, and about 6,300 seen in common at both sites. If we count by number of proteins identified rather than number of proteins that are quantifiable, the percentage in the overlap is lower (about 92% (6,300 out of 6,800)). Restricting the counts to quantifiable proteins gets the overlap up to 96% (6,300 out of 6,500), but ID counting inflates low abundance things. When we use quantitative values in the counting, we see that the proteins unique to each site are extremely low abundance (only 0.1% of the intensity total). The vast majority of the signal at each site comes from proteins seen (and quantifiable) at both sites. A common argument for DIA is to remedy the poor reproducibility of identifications and quantifications in DDA experiments. I don't see a problem that needs fixing for this data.
 
 ### Missing data
 
-The BGS data was 6,539 proteins with 10 TMT values per protein for a total of 65,390 values. Of those, there were 31 missing values (0.05%). There were 6,504 proteins with 65,040 total values and 35 missing values (0.05%) for the FLI data. Low missing data is clearly one of the advantages of TMT labeling. There is no missing data problem to fix either.
+The BGS data was 6,539 proteins with 10 TMT values per protein for a total of 65,390 values. Of those, there were 31 missing values (0.05%). There were 6,504 proteins with 65,040 total values and 35 missing values (0.05%) for the FLI data. Low missing data is clearly one of the advantages of TMT labeling. There is no missing data problem to worry about either.
 
 ### Data Quality
 
@@ -151,13 +156,13 @@ The BGS data was 6,539 proteins with 10 TMT values per protein for a total of 65
 
 Global dataset stats and tables of numbers are exciting to me, but others might prefer plots and figures. I completely decouple quantitative data **generation** from quantitative data **analysis**. The data generation in the PAW pipeline is all Python scripts because an actual programming language is better for that kind of data processing. Once properly summarized quantitative data is packaged in well-formed tables, R and Bioconductor tools can be used. Statistical tools and data visualizations are more mature in R compared to Python. Notebooks are an excellent way to bring transparency, reproducibility, and story telling to data analyses. Jupyter notebooks are what I use (RMarkdown is also an alternative).
 
-During the five years I have been analyzing data with notebooks, I have learned a few things. Every experiment is different and flexibility is key. You have to so some homework and understand some of the biology and the experimental design. You need some domain knowledge to inform the data analysis steps. I am not talking about a high level of biological expertise for each experiment you analyze, just enough biology background to understand why the study was designed as such, and to see if there are any positive or negative controls you can leverage in evaluating the data analysis steps. The data generation steps are much simpler, with far fewer choices, than the data analysis steps. Software that tries to combine data generation and data analysis is usually brought to its knees by the trade offs taken to add some lowest common denominator data analysis framework. You end up with hard to use software that performs poorly.
+During the five years I have been analyzing data with notebooks, I have learned a few things. Every experiment is different and flexibility is key. You have to so some homework and understand some of the biology and the experimental design. You need some domain knowledge to inform the data analysis steps. I am not talking about a high level of biological expertise for each experiment you analyze, just enough biology background to understand why the study was designed as such, and to see if there are any positive or negative controls you can leverage in evaluating the data analysis steps. The data generation steps are much simpler, with far fewer choices, than the subsequent data analysis steps. Software that tries to combine data generation and data analysis is usually brought to its knees by the trade offs taken to add some lowest common denominator data analysis framework. You end up with hard to use software that performs poorly.
 
-I have settled on a two notebook data analysis strategy. One notebook looks at dataset quality control metrics to make sure data normalizations worked as intended, that biological groups have the expected characteristics (that biological replicates within groups are similar and that there are some differences between groups), that samples are generally consistent in global properties (there can be many issues that can lead to sample outliers), and the degree of variance in the data (kind of a heads up on what to expect from statistical testing). A series of QC metrics and checks can find issues in the data that would not be obvious in the typical statistical testing steps. These QC steps could be incorporated into a longer statistical testing notebook but that hinders good data story telling (the story gets too long and complicated). The second notebook can focus on the statistical testing and visualization of differential abundance candidates.    
+I have settled on a two notebook data analysis strategy. One notebook looks at dataset quality control metrics to make sure data normalizations worked as intended, that biological groups have the expected characteristics (that biological replicates within groups are similar and that there are some differences between groups), that samples are generally consistent in global properties (there can be many issues that can lead to sample outliers), and seeing the degree of variance in the data (kind of a heads up on what to expect from statistical testing). A series of QC metrics and checks can find issues in the data that would not be obvious in the typical statistical testing steps. These QC steps could be incorporated into a longer statistical testing notebook, but that hinders good data story telling (the story gets too long and complicated). The second notebook can focus on the statistical testing and visualization of differential abundance candidates. Most invesitgators are more interested (sometimes) in statistical testing than QC metrics.    
 
 #### QC metrics
 
-We will first look at the TMT data from each site independently. I created a combined grouped protein summary with all of the runs from both sites to get the best protein inference and to make sure that the quantitative protein data from each site was aligned to the same list of proteins. That summary table was opened in Excel for additional data filtering. There are always additional keratins identified that are not automatically mapped to the keratins in the common contaminants. Those get flagged as additional contaminants. There can be other classes of proteins that may or may not be contaminants depending on the samples, such as, hemoglobins and serum albumin. I always double check what proteins should or should not be flagged as contaminants. Excel's column filters make this easy. As I mentioned above, we identify more proteins than we can quantify. Some proteins do not have any quantitative data and need to be excluded. After these decisions about what proteins to quantify and which to exclude are made, the data from each site was packaged into simple tables (saved as tab-delimited text files) for loading into the notebooks. These tables have a column to denote the protein (the accessions) and 10 columns of TMT intensity values. The column labels were labeled by sample names instead of TMT tags to make the notebooks easier to understand.
+We will first look at the TMT data from each site independently. I created a combined grouped protein summary with all of the runs from both sites to get the best protein inference and to make sure that the quantitative protein data from each site was aligned to the same list of proteins. That summary table was opened in Excel for additional data filtering. There are always some keratins identified that are not automatically mapped to the keratins in the common contaminants. Those get flagged as additional contaminants. There can be other classes of proteins that may or may not be contaminants depending on the samples, such as, hemoglobins and serum albumin. I always double check what proteins should or should not be flagged as contaminants. Excel's column filters make this easy. As I mentioned above, we identify more proteins than we can quantify in DDA methods. Some proteins do not have any quantitative data and need to be excluded. After these decisions about which proteins to quantify and which to exclude are made, the data from each site was packaged into simple tables (saved as tab-delimited text files) for loading into the notebooks. These tables have a column to denote the protein (the accessions) and 10 columns of TMT intensity values. The columns were labeled by sample names instead of TMT tags to make the notebooks easier to understand.
 
 ##### TMM normalization
 
@@ -171,15 +176,19 @@ Boxplots of the log10 protein intensities are one way to evaluate the data befor
 
 ![After TMM boxplots](images/Slide2.png)
 
+TMM normalization results in better horizontal alignment of data distributions (notches, boxes, and whiskers all line up).
+
 ##### Clustering plots
 
-Clustering by biological groups is a powerful way to find batch effects and other issues with your samples. That makes sense when there are actual biological groups. In this experiment, we have 10 biological replicates of normal mouse brain as a constant background that makes up the bulk of the samples. The human UPS2 proteins are spiked in at such low levels that only 18 of the 48 could be identified. They do not have much effect on the clustering and the views are not interesting for this experiment.
+Clustering by biological groups is a powerful way to find batch effects and other issues with your experiment. That makes sense when there are actual biological groups. In this experiment, we have 10 biological replicates of normal mouse brain as a constant background that makes up the bulk of the samples. The human UPS2 proteins are spiked in at such low levels that only 18 of the 48 could be identified. They do not have much effect on the clustering and the views are not so interesting for this experiment.
 
 ##### Coefficients of Variance
 
-Coefficients of Variance (CVs) within biological groups are another good metric for evaluating data before and normalizations. We only have one group of 10 samples in practical terms here. The median CV was lowered from 8.8% to 5.8% for the BGS site, and lowered from 8.9% to 6.1% for the FLI data. Animal model systems are used because most biological variability is removed. We expect mice data to have lower variability compared to human samples. That said, a 6% CV is very low. I have worked with TMT data for brain samples in the past (both human and mice) and brain samples seem to have lower variability compared to most other tissues.
+Coefficients of Variance (CVs) within biological groups is another good metric for evaluating data before and after normalizations. We only have one group of 10 samples in practical terms here. The median CV was lowered from 8.8% to 5.8% for the BGS site, and lowered from 8.9% to 6.1% for the FLI data. Animal model systems are used partly because biological variability is reduced. We expect mice data to have lower variability compared to human samples. That said, a 6% CV is very low, even for mice samples. I have worked with brain sample TMT data in the past (both human and mice) and brain samples seem to have lower variability compared to most other tissues.
 
-**Ballpark Median CVs by sample types:** I have seen many types of samples in the 7+ years of analyzing TMT datasets (all SPS-MS3 acquisition) and have some typical numbers for Cvs. Some types of samples are easier to collect and work with than others when looking at animal and human systems and that is reflected in CVs.
+I have seen many types of samples in the 7+ years of analyzing TMT datasets (all SPS-MS3 acquisition) and have some typical numbers for Cvs. Some types of samples are easier to collect and work with than others when looking at animal and human systems and that is reflected in the CVs.
+
+**Ballpark Median CVs by sample types:** 
 
 Sample Type|Ballpark Median CV
 ---|---
@@ -196,15 +205,15 @@ A nearly universal given in these experiments is that the biological replicates 
 
 ![BGS scatter plot grids](images/Slide3.png)
 
-We expect properly summarized and normalized TMT data from a single plex to be very precise. We also expect decent accuracy and dynamic range when using the SPS-MS3 instrument method available on Thermo Orbitrap Tribrid instruments. We have replicate 1 samples of the 5 UPS2 spike-in levels from the BGS data. On the left, we have all proteins (mouse and UPS2); on the right, we have just the mouse background proteins. In the bottom row of the left panel, the handful of proteins above the diagonal trend line are the UPS proteins. They are missing in the bottom row of the right panel were we do not have any UPS2 proteins.
+We expect properly summarized and normalized TMT data from a single plex to be very precise. We also expect decent accuracy and dynamic range when using the SPS-MS3 instrument method available on Thermo Orbitrap Tribrid instruments. We have Replicate 1 samples of the 5 UPS2 spike-in levels from the BGS data. On the left, we have all proteins (mouse and UPS2); on the right, we have just the mouse background proteins. In the bottom row of the left panel, the handful of proteins above the diagonal trend line are the UPS proteins. They are missing in the bottom row of the right panel were we do not have any UPS2 proteins.
 
 ![FLI scatter plot grids](images/Slide4.png)
 
-These are similar plots from the FLI data with the replicate 2 samples. The pattern is the same. Note: the correlation coefficient is not a very sensitive metric. We can tell far more with our eyes as to what samples have tighter scatter plots.
+These are similar plots from the FLI data with the Replicate 2 samples. The pattern is the same. Note: the correlation coefficient is not a very sensitive metric (R^2 values usually run from 0.9 to 1.0 for typical data). We can tell far more with our eyes as to what samples have tighter scatter plots.
 
 ![Average scatter plot grid](images/Slide5.png)
 
-Another thing we can do is to average intensities by biological group and do scatter plots of the average vectors. This lets us get a heads up on the statistical testing by seeing which groups are similar or different. We do not have any biological groups in this experiment, so we can compare the sample replicates. We see that the proteomes of technical replicates are very similar. That is true at both sites and whether we have all proteins or just mouse proteins. There are a few proteins off of the diagonal trend line, but the vast majority of the 6,260 proteins are very similar over almost 6 decades of intensity dynamic range.
+Another thing we can check is to average intensities by biological group and do scatter plots of the average vectors. This lets us get a heads up on the statistical testing by seeing which groups are similar or different. We do not have any biological groups in this experiment, so we can compare the sample replicates. We see that the proteomes of technical replicates are very similar. That is true at both sites and whether we have all proteins or just mouse proteins. There are a few proteins off of the diagonal trend line, but the vast majority of the 6,260 proteins are very similar over almost 6 decades of intensity dynamic range.
 
 ### Comparison between Sites
 
