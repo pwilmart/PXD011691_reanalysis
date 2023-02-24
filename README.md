@@ -49,35 +49,35 @@ A comma is used as the thousands separator in numbers below (USA convention).
 
 I will summarize important positive and negative things from the publication that are directly relevant to the data reanalysis. At this point in time I have done just the TMT data, so I will focus on those parts of the paper now and add more on DIA later. The sample prep seems good. The samples were processed in one lab and the final samples were run on LC-MS platforms at two lab sites (Biognosys (BGS) and Fritz Lipmann Institute (FLI)).  For the TMT samples, the common sample processing involved trypsin digestion, TMT 10-plex labeling, mixing labeled samples, and first dimension fractionation into 10 fractions.
 
-The samples were 10 commercial mouse cerebellum samples (biological replicates). Human UPS2 proteins were spiked in at low levels. There were 5 UPS2 dilutions done in duplicate. The analytical platform had different (but similar) LC systems and the same model mass specs (Thermo Orbitrap Fusion Lumos Tribrids). The same instrument method files were used at both sites.
+The samples were 10 commercial mouse cerebellum samples (biological replicates). Human UPS2 proteins were spiked in at low levels. There were 5 UPS2 dilutions done in duplicate. The analytical platform had similar LC systems and the same model mass specs (Thermo Orbitrap Fusion Lumos Tribrids). The same instrument method files were used at both sites. DIA and TMT experiments used the Lumos.
 
-DIA data was generated in 10 single shot runs. A 6-fraction DDA analysis of a pooled sample was used for library creation with MaxQuant. DIA data was collected in a 2-hour run with 40 variable width MS2 windows. DIA data was analyzed with Spectronaut Pulsar X in both library and library-free modes. A common mouse Swiss-Prot FASTA file was used for library building or the library-free direct DIA analysis.
+DIA data was generated in 10 single shot runs. A 6-fraction DDA analysis of a pooled sample was used for library creation with MaxQuant. DIA data was collected in a 2-hour run with 40 variable width MS2 windows. DIA data was analyzed with Spectronaut Pulsar X in both library and library-free modes. A common mouse Swiss-Prot FASTA file was used for library building or the library-free direct DIA analysis (and for the TMT data analysis).
 
-The TMT data was generated using the SPS-MS3 method on the Lumos Tribrids. Instrument acquisition settings were the same. The second dimension low-pH reverse runs were 2 hours long. The TMT data was analyzed with Proteome Discoverer 2.2 using Mascot and the mouse Swiss-Prot FASTA file (about 17K sequences from 2016). Mascot settings were typical narrow (10 ppm) precursor tolerance and 0.5 Da for the ion trap MS2 fragments. Percolator post processing was used for PSM error control. Reporter ions were PD default of signal-to-noise ratios. Minimum peptide length was probably 6 (a PD default). Unique peptides only were used for quant. Some protein inference and error control option in PD (or maybe is was IDPicker post-processing the PSM export from PD?) must have been used but was not detailed.
+The TMT data was generated using the SPS-MS3 method on the Lumos Tribrids. Instrument acquisition settings were the same at both sites. The second dimension low-pH reverse runs were 2 hours long. The TMT data was analyzed with Proteome Discoverer v2.2 (PD) using Mascot and the mouse Swiss-Prot FASTA file (about 17K sequences from 2016). Mascot settings were typical narrow (10 ppm) precursor tolerance and 0.5 Da for the ion trap MS2 fragments. Percolator post processing was used for PSM error control. Reporter ions were PD default of signal-to-noise ratios. Minimum peptide length was probably 6 (a PD default). Unique peptides only were used for quant. Some protein inference and error control options in PD (or maybe is was IDPicker post-processing the PSM export from PD?) must have been used but were not detailed.
 
-The sample to TMT channel key was not provided. The main summary tables in the manuscript have reporter ion median values as the protein summary values. I do not think this is an option in PD, so post-processing of the PD lower level data must have been done (details not provided). The PXD011691 repository had the RAW files and the PD MSF files. The MSF files are SQLite3 relational databases and meet the repository requirements. However, MSF files are intermediate files in PD since 2.x and cannot be viewed by newer PD viewers. No details about the PD analysis beyond what was described in the paper could be extracted.
+The sample to TMT channel key was not provided. The main summary tables in the manuscript have reporter ion median values as the protein summary values. I do not think this is an option in PD, so post-processing of the PD lower level data must have been done (details not provided). The PXD011691 repository had the RAW files and the PD MSF files. The MSF files are SQLite3 relational database files and meet the repository requirements. However, MSF files are intermediate files in PD since 2.x and cannot be viewed by newer PD viewers. No details about the PD analysis beyond what was described in the paper could be easily extracted from the SQLite3 file.
 
-Much of the paper presents an analysis of the UPS2 proteins and mostly ignores the mouse background proteins. The UPS spike-in is not a great choice. The UPS proteins are human and they have a lot of sequence homology to their respective mouse orthologs. This creates additional shared peptide complications. UPS2 has 48 proteins in groups of 8 spanning 5 decades of concentration difference. On top of the built-in dilutions of UPS2 proteins, the UPS2 proteins were added to the mouse background in 5 different dilutions (just 2 replicates of each dilution). The dilution squared effect and overall low levels of UPS2 spike-in resulted in detection of only 12-19 UPS proteins across the DIA and TMT data. The low levels of UPS2 proteins and insufficient replicates for proper analysis make the UPS2 spike-in data of extremely limited utility. It is better to avoid this distraction and focus on the characteristics of the mouse background proteins.
+Much of the paper presents an analysis of the UPS2 proteins and mostly ignores the mouse background proteins. The UPS2 spike-in was not a great choice. The UPS proteins are human and they have a lot of sequence homology to their respective mouse orthologs. This creates additional shared peptide complications (which the paper addressed). UPS2 has 48 proteins in groups of 8 spanning 5 decades of concentration difference (6 abundance tiers of 8 proteins). On top of the built-in dilutions of UPS2 proteins, the UPS2 proteins were added to the mouse background in 5 different dilutions (just 2 replicates of each dilution). The "dilution squared" effect and overall low levels of UPS2 spike-in proteins resulted in detection of only 12-19 UPS proteins across the DIA and TMT data. The low levels of UPS2 proteins and insufficient replicates for typical statistical analyses made the UPS2 spike-in data of extremely limited utility. I decided to avoid this distraction and focus on the characteristics of the mouse background proteins.
 
 ## TMT data Reanalysis
 
 ### Processing Overview
 
-Many aspects of the TMT processing in the publication are problematic. Signal-to-noise ratios are not a proper unit of measurement, mouse Swiss-Prot FASTA file is incomplete, Mascot is not great for ion trap MS2 spectra, and how the data was summarized for protein level quant. It made sense to process the data through [my pipeline](https://github.com/pwilmart/PAW_pipeline) where the wrinkles of TMT data processing have been ironed out in 7+ years of use.
+Many aspects of the TMT processing in the publication are problematic. Signal-to-noise ratios are not a proper unit of measurement, the mouse Swiss-Prot FASTA file is a bit incomplete, Mascot is not the best choice for ion trap MS2 spectra, and I did not like how the data was summarized for protein level quant. I processed the data through my [Comet/PAWs pipeline](https://github.com/pwilmart/PAW_pipeline) where the wrinkles of TMT data processing have been ironed out in 7+ years of use.
 
-Here are some of the parameter choices that make improvements:
+Here are some of the parameter choices and pipeline features that I thought would make improvements:
 - more complete FASTA file (21K sequences vs 17K)
 - minimum peptide length of 7 amino acids
 - [wide precursor tolerance](https://pwilmart.github.io/blog/2021/04/22/Parent-ion-tolerance)
 - Comet search engine is more sensitive
-- accurate/sensitive PSM FDR control
-- two peptide per protein per plex rule
+- accurate and sensitive PSM FDR control
+- two peptide per protein per plex rule for protein ID
 - extended parsimony protein grouping
 - reporter ion peak heights (intensities)
-- reporter ion summing for protein quant
-- missing value handling
+- reporter ion sums for protein quant values
+- integrated missing value handling
 
-> Definition of "plex". A set of samples labeled by one TMT regent kit (6-plex, 10-plex, 11-plex, 16-plex, or 18-plex) is a plex. A plex may be analyzed by one or more LC-MS runs. A TMT experiment may be one or more than one plex. Multiple plexes are used to accommodate more biological samples than can fit into a single TMT labeling kit.
+> Definition of "plex". A set of samples labeled by one TMT regent kit (6-plex, 10-plex, 11-plex, 16-plex, or 18-plex) is a plex. A plex may be analyzed by one or more LC-MS runs. A TMT experiment may be one or more than one plex. Multiple plexes can be used to accommodate more biological samples than can fit into a single TMT labeling kit.
 
 What|BGS|FLI|PAW BGS|PAW FLI|Gain
 ---|---|---|---|---|---
@@ -89,7 +89,7 @@ Proteins<br>2 peptides/protein|5,938|5,837|6,319|6,271|7%
 
 I am not sure that peptide sequence counting was done the same way (I don't usually count peptides). It is clear that the PAW processing is better.
 
-The PAW pipeline breaks the FDR analysis into peptide subclasses (deltamass windows, charge state, modification state) and it can be fun to see what fractions of the PSMs fall into the different subclasses.
+The PAW pipeline splits the FDR analysis into peptide subclasses (deltamass windows, charge state, modification state) and it can be instrucutve to see what fractions of the PSMs fall into the different subclasses.
 
 Charge|Fraction
 ---|---
@@ -105,7 +105,7 @@ Delta Mass Region|Fraction
 1-Da narrow window|9.5%
 Outside narrow windows|2.4%
 
-Most peptides have very good agreement between measured and predicted masses. There are quite a few PSMs with deamidated Asn and with C13 triggers. There are also many PSMs with inaccurate masses.
+Most peptides have very good agreement between measured and predicted masses. There are quite a few PSMs with deamidated Asn and with C13 triggers (nominal 1-Da delta masses). There are also many PSMs with inaccurate masses (this can depend on the instrument method options).
 
 Charge|Fraction with M+16
 ---|---
@@ -114,7 +114,7 @@ Charge|Fraction with M+16
 4+|23.2%
 All|20.1%
 
-Oxidized Met is an important variable PTM to add. Note that PSM counts inflate how much sample seems oxidized. Intensity-based estimates would be smaller.
+Oxidized Met is an important variable PTM to add due to its prevalence in most sample preps. Note that PSM counts inflate how much sample seems oxidized. Intensity-based estimates would be smaller.
 
 ### Proteome Depth and Overlap Between Sites
 
