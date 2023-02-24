@@ -6,9 +6,9 @@ The data is from [this paper](https://pubs.acs.org/doi/abs/10.1021/acs.jproteome
 
 > Muntel, J., Kirkpatrick, J., Bruderer, R., Huang, T., Vitek, O., Ori, A. and Reiter, L., 2019. Comparison of protein quantification in a complex background by DIA and TMT workflows with fixed instrument time. Journal of proteome research, 18(3), pp 1340-1351.
 
-The paper compares 10 single shot DIA runs to a 10-fraction TMT-labeling experiment using the same biological replicate samples of a mouse brain background. The samples were run in two labs using similar LC and mass spec systems. Note: [human UPS2](https://www.sigmaaldrich.com/US/en/technical-documents/technical-article/protein-biology/protein-mass-spectrometry/ups1-and-ups2-proteomic) proteins were spiked-in to the mouse background (more on this below).
+The paper compares 10 single shot DIA runs to a 10-fraction TMT-labeling experiment using biological replicate samples of a mouse brain background. The samples were run in two labs using similar LC and mass spec systems. [Human UPS2](https://www.sigmaaldrich.com/US/en/technical-documents/technical-article/protein-biology/protein-mass-spectrometry/ups1-and-ups2-proteomic) proteins were spiked-in to the mouse background (more on this below).
 
-I would like to thank Michael Steidel for recently reminding me of this paper as a rather fair comparison of DIA and TMT quantitative methods. I had grabbed the TMT RAW files back in October 2019 and processed the data. I am guessing that I lost interest in the reanalysis because of the UPS2 proteins (more on that below). A recent [blog-like post](https://github.com/pwilmart/Human-plasma_DIA-vs-TMT) comparing DIA and TMT sparked interest in a data revisit.
+I would like to thank Michael Steidel for recently reminding me of this paper as a more fair comparison of DIA and TMT quantitative methods. I had grabbed the TMT RAW files way back in October 2019 and processed the data with my Comet/PAWs pipeline. I am guessing that I lost interest in the reanalysis because of the UPS2 proteins (more on that below). A recent [blog-like post](https://github.com/pwilmart/Human-plasma_DIA-vs-TMT) comparing DIA and TMT sparked interest in a revisit of the data.
 
 ---
 
@@ -20,6 +20,7 @@ I would like to thank Michael Steidel for recently reminding me of this paper as
   - Proteome depths/overlap
   - Missing data
   - Data quality
+  - Controlling false positives
   - Comparison between sites
   - UPS2 spike-in
 - DIA Data
