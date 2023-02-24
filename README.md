@@ -184,7 +184,7 @@ Clustering by biological groups is a powerful way to find batch effects and othe
 
 ##### Coefficients of Variance
 
-Coefficients of Variance (CVs) within biological groups is another good metric for evaluating data before and normalizations. We only have one group of 10 samples in practical terms here. The median CV was lowered from 8.8% to 5.8% for the BGS site, and lowered from 8.9% to 6.1% for the FLI data. Animal model systems are used partly because biological variability is reduced. We expect mice data to have lower variability compared to human samples. That said, a 6% CV is very low, even for mice samples. I have worked with brain sample TMT data in the past (both human and mice) and brain samples seem to have lower variability compared to most other tissues.
+Coefficients of Variance (CVs) within biological groups is another good metric for evaluating data before and after normalizations. We only have one group of 10 samples in practical terms here. The median CV was lowered from 8.8% to 5.8% for the BGS site, and lowered from 8.9% to 6.1% for the FLI data. Animal model systems are used partly because biological variability is reduced. We expect mice data to have lower variability compared to human samples. That said, a 6% CV is very low, even for mice samples. I have worked with brain sample TMT data in the past (both human and mice) and brain samples seem to have lower variability compared to most other tissues.
 
 I have seen many types of samples in the 7+ years of analyzing TMT datasets (all SPS-MS3 acquisition) and have some typical numbers for Cvs. Some types of samples are easier to collect and work with than others when looking at animal and human systems and that is reflected in the CVs.
 
@@ -205,15 +205,15 @@ A nearly universal given in these experiments is that the biological replicates 
 
 ![BGS scatter plot grids](images/Slide3.png)
 
-We expect properly summarized and normalized TMT data from a single plex to be very precise. We also expect decent accuracy and dynamic range when using the SPS-MS3 instrument method available on Thermo Orbitrap Tribrid instruments. We have replicate 1 samples of the 5 UPS2 spike-in levels from the BGS data. On the left, we have all proteins (mouse and UPS2); on the right, we have just the mouse background proteins. In the bottom row of the left panel, the handful of proteins above the diagonal trend line are the UPS proteins. They are missing in the bottom row of the right panel were we do not have any UPS2 proteins.
+We expect properly summarized and normalized TMT data from a single plex to be very precise. We also expect decent accuracy and dynamic range when using the SPS-MS3 instrument method available on Thermo Orbitrap Tribrid instruments. We have Replicate 1 samples of the 5 UPS2 spike-in levels from the BGS data. On the left, we have all proteins (mouse and UPS2); on the right, we have just the mouse background proteins. In the bottom row of the left panel, the handful of proteins above the diagonal trend line are the UPS proteins. They are missing in the bottom row of the right panel were we do not have any UPS2 proteins.
 
 ![FLI scatter plot grids](images/Slide4.png)
 
-These are similar plots from the FLI data with the replicate 2 samples. The pattern is the same. Note: the correlation coefficient is not a very sensitive metric. We can tell far more with our eyes as to what samples have tighter scatter plots.
+These are similar plots from the FLI data with the Replicate 2 samples. The pattern is the same. Note: the correlation coefficient is not a very sensitive metric (R^2 values usually run from 0.9 to 1.0 for typical data). We can tell far more with our eyes as to what samples have tighter scatter plots.
 
 ![Average scatter plot grid](images/Slide5.png)
 
-Another thing we can do is to average intensities by biological group and do scatter plots of the average vectors. This lets us get a heads up on the statistical testing by seeing which groups are similar or different. We do not have any biological groups in this experiment, so we can compare the sample replicates. We see that the proteomes of technical replicates are very similar. That is true at both sites and whether we have all proteins or just mouse proteins. There are a few proteins off of the diagonal trend line, but the vast majority of the 6,260 proteins are very similar over almost 6 decades of intensity dynamic range.
+Another thing we can check is to average intensities by biological group and do scatter plots of the average vectors. This lets us get a heads up on the statistical testing by seeing which groups are similar or different. We do not have any biological groups in this experiment, so we can compare the sample replicates. We see that the proteomes of technical replicates are very similar. That is true at both sites and whether we have all proteins or just mouse proteins. There are a few proteins off of the diagonal trend line, but the vast majority of the 6,260 proteins are very similar over almost 6 decades of intensity dynamic range.
 
 ### Comparison between Sites
 
