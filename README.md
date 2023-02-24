@@ -120,14 +120,14 @@ Oxidized Met is an important variable PTM to add due to its prevalence in most s
 
 How you count things when you compare things is of critical importance. If we were to look at the data from each site separately, the PAW pipeline would require two peptides per protein. That would give the protein ID numbers above. When data from multiple TMT plexes are processed in the PAW pipeline, you want to take all of the 1% FDR filtered files and do a collective protein inference. The more PSMs we use, the more information we can bring to the inference logic. This also gives peptide and protein summary files with all of the data in one place (we do not have to merge tables). The protein ID criteria for the combined BGS and FLI data is two peptides per protein per plex. Proteins do not have to have 2 peptide in **both** plexes. This relaxes things slightly. The PAW pipeline also removes (zeroes out) some very low intensity reporter ion on a scan basis. We end up with a few proteins that meet the ID criteria but have no associated reporter ion data. We have a few more proteins that we can ID than we can quantify.
 
-When we want to talk about proteome depth and overlap between sites, it makes more sense to count quantifiable proteins (we are doing quantitative proteomics, right?). Wait a minute. Since we have quantities for each protein, should we count proteins or count total intensities? Yes. The union of all protein identifications from both sites was 6,796.
+When we want to talk about proteome depth and overlap between sites, it makes more sense to count quantifiable proteins (we are doing quantitative proteomics, right?). Wait a minute. Since we have quantities for each protein, should we count proteins or count total intensities? We will do it both ways and see. The union of all protein identifications from both sites was 6,796.
 
 Site|Quantifiable Proteins|Average Intensity per Sample
 ---|---|---
 BGS|6,539|19,328,018,191
 FLI|6,504|42,620,258,349
 
-We have a few more proteins in the BGS data even though the intensities are less than half compared to the FLI data. Now we can ask of the proteins seen at each site, how many were unique to that site and how many were seen at the other site.
+We have a few more proteins in the BGS data even though the intensities are less than half compared to the FLI data. Of the proteins seen at each site, how many were unique to that site and how many were seen at the other site?
 
 Site|Quantity|Seen at both sites|Unique to site
 ---|---|---|---
@@ -140,11 +140,11 @@ FLI|Count Percentages|96.4%|3.6%
 FLI|Protein Intensity|42,584,284,686|35,973,663
 FLI|Intensity Percentages|99.9%|0.1%
 
-If we count by number of proteins identified rather than number of proteins that are quantifiable, the percentage in the overlap is lower (about 92%). Restricting the counts to quantifiable proteins gets the overlap up to 96%, but plain counts inflate low abundance things. When we use quantitative values in the counting, we see that the proteins unique to each site are extremely low abundance (only 0.1% of the intensity total). The vast majority of the signal at each site comes from proteins seen (and quantifiable) at both sites. DIA is supposed to remedy the poor reproducibility of identifications and quantifications in DDA experiments. Well, I don't see a problem that needs fixing with this data.
+We have about 6,800 total protein identifications (after protein grouping and excluding decoys/contamininants), there are about 6,500 identified at each site, and about 6,300 seen in common at both sites. If we count by number of proteins identified rather than number of proteins that are quantifiable, the percentage in the overlap is lower (about 92% (6,300 out of 6,800)). Restricting the counts to quantifiable proteins gets the overlap up to 96% (6,300 out of 6,500), but ID counting inflates low abundance things. When we use quantitative values in the counting, we see that the proteins unique to each site are extremely low abundance (only 0.1% of the intensity total). The vast majority of the signal at each site comes from proteins seen (and quantifiable) at both sites. A common argument for DIA is to remedy the poor reproducibility of identifications and quantifications in DDA experiments. I don't see a problem that needs fixing for this data.
 
 ### Missing Data
 
-The BGS data was 6,539 proteins with 10 TMT values per protein for a total of 65,390 values. Of those, there were 31 missing values (0.05%). There were 6,504 proteins with 65,040 total values and 35 missing values (0.05%) for the FLI data. Low missing data is clearly one of the advantages of TMT labeling. There is no missing data problem to fix either.
+The BGS data was 6,539 proteins with 10 TMT values per protein for a total of 65,390 values. Of those, there were 31 missing values (0.05%). There were 6,504 proteins with 65,040 total values and 35 missing values (0.05%) for the FLI data. Low missing data is clearly one of the advantages of TMT labeling. There is no missing data problem to worry about either.
 
 ### Data Quality
 
