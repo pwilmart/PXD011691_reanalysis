@@ -15,14 +15,14 @@ I would like to thank Michael Steidel for recently reminding me of this paper as
 ## Contents:
 - Disclaimers
 - Paper review
-- TMT Data
+- TMT data
   - Processing overview
   - Proteome depths/overlap
   - Missing data
   - Data quality
   - Comparison between sites
   - UPS2 spike-in
-- DIA Data
+- DIA data
   - Try to use similar protein summarization as TMT
   - Use newer DIA Software
   - Similar QC metrics as TMT
@@ -44,7 +44,7 @@ A comma is used as the thousands separator in numbers below (USA convention).
 
 ---
 
-## Paper Review
+## Paper review
 
 I will summarize important positive and negative things from the publication that are directly relevant to the data reanalysis. At this point in time I have done just the TMT data, so I will focus on those parts of the paper now and add more on DIA later. The sample prep seems good. The samples were processed in one lab and the final samples were run on LC-MS platforms at two lab sites (Biognosys (BGS) and Fritz Lipmann Institute (FLI)).  For the TMT samples, the common sample processing involved trypsin digestion, TMT 10-plex labeling, mixing labeled samples, and first dimension fractionation into 10 fractions.
 
@@ -58,9 +58,9 @@ The sample to TMT channel key was not provided. The main summary tables in the m
 
 Much of the paper presents an analysis of the UPS2 proteins and mostly ignores the mouse background proteins. The UPS spike-in is not a great choice. The UPS proteins are human and they have a lot of sequence homology to their respective mouse orthologs. This creates additional shared peptide complications. UPS2 has 48 proteins in groups of 8 spanning 5 decades of concentration difference. On top of the built-in dilutions of UPS2 proteins, the UPS2 proteins were added to the mouse background in 5 different dilutions (just 2 replicates of each dilution). The dilution squared effect and overall low levels of UPS2 spike-in resulted in detection of only 12-19 UPS proteins across the DIA and TMT data. The low levels of UPS2 proteins and insufficient replicates for proper analysis make the UPS2 spike-in data of extremely limited utility. It is better to avoid this distraction and focus on the characteristics of the mouse background proteins.
 
-## TMT data Reanalysis
+## TMT data reanalysis
 
-### Processing Overview
+### Processing overview
 
 Many aspects of the TMT processing in the publication are problematic. Signal-to-noise ratios are not a proper unit of measurement, mouse Swiss-Prot FASTA file is incomplete, Mascot is not great for ion trap MS2 spectra, and how the data was summarized for protein level quant. It made sense to process the data through [my pipeline](https://github.com/pwilmart/PAW_pipeline) where the wrinkles of TMT data processing have been ironed out in 7+ years of use.
 
@@ -115,7 +115,7 @@ All|20.1%
 
 Oxidized Met is an important variable PTM to add. Note that PSM counts inflate how much sample seems oxidized. Intensity-based estimates would be smaller.
 
-### Proteome Depth and Overlap Between Sites
+### Proteome depth and overlap between sites
 
 How you count things when you compare things is of critical importance. If we were to look at the data from each site separately, the PAW pipeline would require two peptides per protein. That would give the protein ID numbers above. When data from multiple TMT plexes are processed in the PAW pipeline, you want to take all of the 1% FDR filtered files and do a collective protein inference. The more PSMs we use, the more information we can bring to the inference logic. This also gives peptide and protein summary files with all of the data in one place (we do not have to merge tables). The protein ID criteria for the combined BGS and FLI data is two peptides per protein per plex. Proteins do not have to have 2 peptide in **both** plexes. This relaxes things slightly. The PAW pipeline also removes (zeroes out) some very low intensity reporter ion on a scan basis. We end up with a few proteins that meet the ID criteria but have no associated reporter ion data. We have a few more proteins that we can ID than we can quantify.
 
@@ -141,7 +141,7 @@ FLI|Intensity Percentages|99.9%|0.1%
 
 If we count by number of proteins identified rather than number of proteins that are quantifiable, the percentage in the overlap is lower (about 92%). Restricting the counts to quantifiable proteins gets the overlap up to 96%, but plain counts inflate low abundance things. When we use quantitative values in the counting, we see that the proteins unique to each site are extremely low abundance (only 0.1% of the intensity total). The vast majority of the signal at each site comes from proteins seen (and quantifiable) at both sites. DIA is supposed to remedy the poor reproducibility of identifications and quantifications in DDA experiments. Well, I don't see a problem that needs fixing with this data.
 
-### Missing Data
+### Missing data
 
 The BGS data was 6,539 proteins with 10 TMT values per protein for a total of 65,390 values. Of those, there were 31 missing values (0.05%). There were 6,504 proteins with 65,040 total values and 35 missing values (0.05%) for the FLI data. Low missing data is clearly one of the advantages of TMT labeling. There is no missing data problem to fix either.
 
